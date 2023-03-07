@@ -26,26 +26,27 @@ public class SQLiteDAL extends SQLiteOpenHelper {
     String[] SalahColumns = new String[]{"date", "imsak", "fajr", "duha", "dhuhor", "asr", "moghrib", "eshaa"};
 
     public SQLiteDAL(@Nullable Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, 2);
     }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         String salahCreate = "CREATE TABLE '" + TABLE_Salah_Time + "' (" +
-                "'" + SalahColumns[0] + "'	TEXT," +
-                "'" + SalahColumns[1] + "'	TEXT," +
-                "'" + SalahColumns[2] + "'	TEXT," +
-                "'" + SalahColumns[3] + "'	TEXT," +
-                "'" + SalahColumns[4] + "'	TEXT," +
-                "'" + SalahColumns[5] + "'	TEXT," +
-                "'" + SalahColumns[6] + "'	TEXT," +
-                "'" + SalahColumns[7] + "'	TEXT," +
-                ");";
+                "'date' TEXT," +
+                "'imsak' TEXT," +
+                "'fajr' TEXT," +
+                "'duha' TEXT," +
+                "'dhuhor' TEXT," +
+                "'asr' TEXT," +
+                "'moghrib' TEXT," +
+                "'eshaa' TEXT);";
         try {
             db.execSQL(salahCreate);
         } catch (Exception ex) {
-
+            Log.d("SQLITE", ex.toString());
         }
     }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         try {
@@ -61,7 +62,7 @@ public class SQLiteDAL extends SQLiteOpenHelper {
             ContentValues contentValues = new ContentValues();
 
             contentValues.put(SalahColumns[0], salatRecord.getDate());
-            contentValues.put(SalahColumns[1], salatRecord.getFajr());
+            contentValues.put(SalahColumns[1], salatRecord.getImsak());
             contentValues.put(SalahColumns[2], salatRecord.getFajr());
             contentValues.put(SalahColumns[3], salatRecord.getDuha());
             contentValues.put(SalahColumns[4], salatRecord.getDhuhor());
@@ -75,7 +76,6 @@ public class SQLiteDAL extends SQLiteOpenHelper {
         }
     }
 
-
     public void addListOfDays(ArrayList<SalatRecord> salatRecords) {
         try {
             SQLiteDatabase db = getWritableDatabase();
@@ -83,7 +83,7 @@ public class SQLiteDAL extends SQLiteOpenHelper {
 
             for (int i = 0; i < salatRecords.size(); i++) {
                 contentValues.put(SalahColumns[0], salatRecords.get(i).getDate());
-                contentValues.put(SalahColumns[1], salatRecords.get(i).getFajr());
+                contentValues.put(SalahColumns[1], salatRecords.get(i).getImsak());
                 contentValues.put(SalahColumns[2], salatRecords.get(i).getFajr());
                 contentValues.put(SalahColumns[3], salatRecords.get(i).getDuha());
                 contentValues.put(SalahColumns[4], salatRecords.get(i).getDhuhor());

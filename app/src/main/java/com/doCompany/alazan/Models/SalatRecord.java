@@ -14,6 +14,10 @@ public class SalatRecord {
         Eshaa = eshaa;
     }
 
+    public String getImsak() {
+        return Imsak;
+    }
+
     public String getDate() {
         return Date;
     }
