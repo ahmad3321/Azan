@@ -18,6 +18,7 @@ import androidx.core.view.GravityCompat
 import androidx.preference.PreferenceManager
 import com.doCompany.alazan.Connection.SQLiteDAL
 import com.doCompany.alazan.Models.Datum
+import com.doCompany.alazan.Models.SalatRecord
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.material.navigation.NavigationView
@@ -63,9 +64,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         Constants.url=url
         var sqldal: SQLiteDAL =SQLiteDAL(this)
         val currentDate = sdf.format(Date())
-        var salatRecord =  sqldal!!.getSalatRecord(currentDate)
-
-        getTimesFromApi(this,city,"Syria","2")
+        var salatRecord =  sqldal!!.getSalatRecord("2023-03-07")
+        val salatRecor1= SalatRecord("2023-03-07","","","","","","","")
+        sqldal.addDay(salatRecor1)
+        //getTimesFromApi(this,city,"Syria","2")
 
         im_cal.setOnClickListener {
             calender() //calender dialoge
