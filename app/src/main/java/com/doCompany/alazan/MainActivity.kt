@@ -2,27 +2,35 @@ package com.doCompany.alazan
 
 import android.app.DatePickerDialog
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.DatePicker
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
+import androidx.preference.PreferenceManager
+import com.doCompany.alazan.Connection.SQLiteDAL
+import com.doCompany.alazan.Models.Datum
+import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_popp.*
 import kotlinx.android.synthetic.main.content_main.*
-import org.json.JSONArray
-import org.json.JSONObject
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.io.IOException
+import java.security.GeneralSecurityException
+import java.text.SimpleDateFormat
 import java.util.*
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     lateinit var mAdView : AdView
@@ -31,22 +39,36 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     var m:Int = cal.get(Calendar.MONTH+1)
     var d:Int = cal.get(Calendar.DAY_OF_MONTH)
     var city:String="Idleb"
+    val sdf = SimpleDateFormat("yyyy-MM-dd")
     // val channel_ID="personal"
     val not_id=1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-       // MobileAds.initialize(this,"ca-app-pub-8351493934827814~6188123033")
+        val perms = arrayOf(
+            "android.permission.INTERNET",
+            "android.permission.ACCESS_NETWORK_STATE"
+        )
+        val permsRequestCode = 200
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(perms, permsRequestCode)
+        }
+        // MobileAds.initialize(this,"ca-app-pub-8351493934827814~6188123033")
         //mAdView = findViewById(R.id.adView)
         //val adRequest = AdRequest.Builder().build()
         //mAdView.loadAd(adRequest)
         //setSupportActionBar(toolbar)
-        getUsers(city)
+        //getUsers(city)
+        var url = "v1/calendarByCity/"+Constants.year+"/"+Constants.month
+        Constants.url=url
+        var sqldal: SQLiteDAL =SQLiteDAL(this)
+        val currentDate = sdf.format(Date())
+        var salatRecord =  sqldal!!.getSalatRecord(currentDate)
+
+        getTimesFromApi(this,city,"Syria","2")
+
         im_cal.setOnClickListener {
             calender() //calender dialoge
-        }
-        btn.setOnClickListener {
-            getUsers(city)
         }
 
         btn_city.setOnClickListener {
@@ -54,7 +76,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             popup.setOnMenuItemClickListener {item ->
                 when(item.title)
                 {
-
                     "إدلب"->{
                         city="Idleb"
                         true
@@ -67,8 +88,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         city="Jisr_al-Shughour"
                         true
                     }
-                    "معرة النعمان"->{
-                        city="Maarrat_al-Nu'man"
+                    "سلقين"->{
+                        city="Salqin"
                         true
                     }
                     "سرمدا"->{
@@ -83,17 +104,35 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         city="Al_bab"
                         true
                     }
+                    "أطمة"->{
+                        city="Atme"
+                        true
+                    }
+                    "اعزاز"->{
+                        city="Azaz"
+                        true
+                    }
+                    "منبج"->{
+                        city="Manbij"
+                        true
+                    }
                     else->false
                 }
+
+            }
+            try {
+                val sharedPreferences1 = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+                val myEdit = sharedPreferences1.edit()
+                myEdit.putString("city", city)
+                myEdit.apply()
+            } catch (e: GeneralSecurityException) {
+                e.printStackTrace()
+            } catch (e: IOException) {
+                e.printStackTrace()
             }
             popup.inflate(R.menu.items)
             popup.show()
         }
-        /*fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }*/
-
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
         )
@@ -101,20 +140,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
         nav_view.setNavigationItemSelectedListener(this)
     }
-
-    /*  private fun notifa() {  notification
-              var builder = NotificationCompat.Builder(this, channel_ID)
-                  .setSmallIcon(R.drawable.ic_stat_name)
-                  .setContentTitle("أوقات الأذان")
-                  .setContentText("حان موعد الأذان حسب التوقيت المحلي لإدلب وماحولها")
-                  .setSound(Uri.parse("android.resource://" + this.getPackageName() + "/" + R.raw.azan))
-                  .setOnlyAlertOnce(true)
-                  .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-              var notificationManagerCompat = NotificationManagerCompat.from(this)
-              notificationManagerCompat.notify(not_id, builder.build())
-
-      }*/
-
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
@@ -156,66 +181,82 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(intent)
             }
         }
-
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
-
     fun getUsers(city:String) {
         // Instantiate the RequestQueue.
         val pDialog: ProgressDialog
         pDialog = ProgressDialog(this)
         pDialog.setMessage("Loading...")
         pDialog.show()
-        val queue = Volley.newRequestQueue(this)
-        val url: String =
-            "http://api.aladhan.com/v1/calendarByCity?city=" + city + "&country=Syria&method=3&month=" + m + "&year=" + y
-
+        //val queue = Volley.newRequestQueue(applicationContext)
+       // geet(url,applicationContext)
         // Request a string response from the provided URL.
-        val stringRequest = StringRequest(
-            Request.Method.GET, url,
-            Response.Listener<String>
+
+        /*val request = JsonObjectRequest(Request.Method.GET, url, null,
             { response ->
-                // Toast.makeText(this,"good",Toast.LENGTH_LONG).show()
+                try {
+                    strResp = response.toString()
+                    jsonOb = JSONObject(strResp)
+                    jsonArray = jsonOb.getJSONArray("data")
+                    jsonInner = jsonArray.getJSONObject(d + 1)
+                    time = jsonInner.getJSONObject("timings")
+                    var fajar = time.getString("Fajr")
 
-                strResp = response.toString()
-                jsonOb = JSONObject(strResp)
-                jsonArray = jsonOb.getJSONArray("data")
-                jsonInner = jsonArray.getJSONObject(d + 1)
-                time = jsonInner.getJSONObject("timings")
-                var fajar = time.getString("Fajr")
 
+                    t_faj1.text = fajar.substring(0, 5)
+                    t_duha1.text = time.getString("Sunrise").substring(0, 5)
+                    t_dhuhor1.text = time.getString("Dhuhr").substring(0, 5)
+                    t_asr1.text = time.getString("Asr").substring(0, 5)
+                    t_moghrib1.text = time.getString("Maghrib").substring(0, 5)
+                    t_eshaa1.text = time.getString("Isha").substring(0, 5)
+                }catch (ex:Exception){
+                    pDialog.hide()
+                }
 
-                t_faj1.text = fajar.substring(0, 5)
-                t_duha1.text = time.getString("Sunrise").substring(0, 5)
-                t_dhuhor1.text = time.getString("Dhuhr").substring(0, 5)
-                t_asr1.text = time.getString("Asr").substring(0, 5)
-                t_moghrib1.text = time.getString("Maghrib").substring(0, 5)
-                t_eshaa1.text = time.getString("Isha").substring(0, 5)
-
-                pDialog.hide()
-            },
-            Response.ErrorListener {
-            })
-        queue.add(stringRequest)
-
+        }, { error ->
+            Log.e("TAG", "RESPONSE IS $error")
+        })
+        queue.add(request)*/
+}
+    private fun getTimesFromApi(cotext:Context,city: String,country:String,method:String) {
+        try{
+            val quotesApi = RetrofitHelper.getInstance().create(QuotesApi::class.java)
+            // launching a new coroutine
+            GlobalScope.launch {
+                val result = quotesApi.getQuotes(Constants.url,city, country, method)
+                if (result != null) {
+                    Log.d("ayush: ", result.body().toString())
+                    var modal: List<Datum> = result.body()!!.data
+                    var date = modal.get(0).date.gregorian.date
+                    var t_Imsak = modal.get(0).timings.Imsak.substring(0, 5)
+                    var t_faj1 = modal.get(0).timings.Fajr.substring(0, 5)
+                    var t_duha = modal.get(0).timings.Sunrise.substring(0, 5)
+                    var t_dhuhor = modal.get(0).timings.Dhuhr.substring(0, 5)
+                    var t_asr = modal.get(0).timings.Asr.substring(0, 5)
+                    var t_moghrib = modal.get(0).timings.Maghrib.substring(0, 5)
+                    var t_eshaa = modal.get(0).timings.Isha.substring(0, 5)
+                    Log.d("result: ", " date: " + date +" t_faj1: "+ t_faj1 + " t_duha: "+t_duha+" t_dhuhor: "+t_dhuhor+" t_asr: "+t_asr+
+                            " t_moghrib: "+t_moghrib+" t_eshaa: "+t_eshaa)
+                }
+            }
+        }catch (exs:Exception){
+            Log.d("ayush: ", exs as String)
+        }
     }
-    lateinit var strResp:String
-    lateinit var jsonOb: JSONObject
-    lateinit var jsonArray: JSONArray
-    lateinit var jsonInner: JSONObject
-    var time: JSONObject = JSONObject()
-
     fun calender()
     {
-
         var date =object: DatePickerDialog.OnDateSetListener{
             override fun onDateSet(p0: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-
-                cal.set(Calendar.YEAR,year)
+                val calendar = Calendar.getInstance()
+                if(year!=calendar.get(Calendar.YEAR)){
+                    Toast.makeText(applicationContext, "السنة مختلفة عن السنة الحالية", Toast.LENGTH_SHORT).show()
+                }
+                cal.set(Calendar.YEAR,calendar.get(Calendar.YEAR))
                 cal.set(Calendar.MONTH,month)
                 cal.set(Calendar.DAY_OF_MONTH,dayOfMonth)
-                y=year
+                y=calendar.get(Calendar.YEAR)
                 m=month+1
                 d=dayOfMonth
             }
@@ -232,4 +273,5 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         startActivity(Intent.createChooser(intent, R.string.share_.toString()))
 
     }
+
 }

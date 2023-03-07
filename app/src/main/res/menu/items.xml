@@ -4,10 +4,13 @@
     <item android:title="إدلب"/>
     <item android:title="حلب"/>
     <item android:title="جسر الشغور"/>
-    <item android:title="معرة النعمان"/>
     <item android:title="سرمدا"/>
     <item android:title="عفرين"/>
     <item android:title="الباب"/>
+    <item android:title="سلقين"/>
+    <item android:title="أطمة"/>
+    <item android:title="اعزاز"/>
+    <item android:title="منبج"/>
 
 
 </menu>

@@ -6,7 +6,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">about</string>
-    <string name="note">لأذان حسب التوقيت الموحد في إدلب وماحولها</string>
+    <string name="note">الأذان حسب التوقيت الموحد في إدلب وماحولها</string>
     <string name="about">جاءت فكرة إنشاء هذا التطبيق بعد اعتماد توقيت موحد لجميع المدن والبلدات في المناطق المحررة ,
         ولمساعدة الأهالي بمعرفة أوقات الأذان في مدنهم وبلداتهم ,أسأل الله أن ينفع به المسلمين وأن يتقبل مني هذا العمل في
         صالح الأعمال ,
@@ -16,6 +16,7 @@
     <string name="develop">developer</string>
     <string name="share_">share using</string>
     <string name="btn_view">View</string>
+    <string name="imsak">imsak</string>
     <string name="faj">Fajar</string>
     <string name="Shoroq">Sunset</string>
     <string name="dhuhor">Dhuhor</string>
