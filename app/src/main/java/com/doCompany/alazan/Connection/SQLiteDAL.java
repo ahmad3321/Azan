@@ -90,8 +90,8 @@ public class SQLiteDAL extends SQLiteOpenHelper {
                 contentValues.put(SalahColumns[5], salatRecords.get(i).getAsr());
                 contentValues.put(SalahColumns[6], salatRecords.get(i).getMoghrib());
                 contentValues.put(SalahColumns[7], salatRecords.get(i).getEshaa());
+                db.insert(TABLE_Salah_Time, null, contentValues);
             }
-            db.insert(TABLE_Salah_Time, null, contentValues);
 
         } catch (Exception ex) {
             Log.e("error",ex.toString());
@@ -125,7 +125,6 @@ public class SQLiteDAL extends SQLiteOpenHelper {
             SQLiteDatabase db = getReadableDatabase();
             SalatRecord salatRecord = null;
             Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_Salah_Time + " WHERE date = '" + dayDate + "'; ", null);
-            Cursor cursor1 = db.rawQuery("SELECT * FROM " + TABLE_Salah_Time + " ; ", null);
 
             if (cursor != null && cursor.moveToNext()) {
                 cursor.moveToFirst();

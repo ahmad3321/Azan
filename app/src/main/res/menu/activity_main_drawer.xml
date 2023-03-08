@@ -3,7 +3,7 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:showIn="navigation_view">
   <group>
-      <item android:title="الأذكار">
+      <item android:title="">
 
           <menu>
               <item
@@ -16,7 +16,7 @@
       </item>
   </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/Communicate">
         <menu>
             <item
                     android:id="@+id/nav_share"

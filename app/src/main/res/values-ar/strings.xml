@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">الأذان</string>
+    <string name="imsak">الإمساك</string>
+    <string name="faj">الفجر</string>
+    <string name="Shoroq">الشمس</string>
+    <string name="dhuhor">الظهر</string>
+    <string name="Asr">العصر</string>
+    <string name="Moghrib">المغرب</string>
+    <string name="esh">العشاء</string>
+    <string name="azk1">أذكار مابعد الصلاة</string>
+    <string name="com">للتواصل مع الفريق البرمجي</string>
+    <string name="zeker1">أَسْـتَغْفِرُ الله، أَسْـتَغْفِرُ الله، أَسْـتَغْفِرُ الله,اللّهُـمَّ أَنْـتَ السَّلامُ ، وَمِـنْكَ السَّلام ، تَبارَكْتَ يا ذا الجَـلالِ وَالإِكْـرام</string>
+    <string name="zeker2">"        ُ"</string>
+    <string name="share_">مشاركة</string>
+    <string name="develop">المطورون</string>
+    <string name="Communicate">التواصل</string>
+</resources>

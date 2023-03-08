@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.AnimationDrawable
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -30,6 +31,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.IOException
 import java.security.GeneralSecurityException
+import java.sql.SQLData
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -41,7 +43,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     var m:Int = cal.get(Calendar.MONTH+1)
     var d:Int = cal.get(Calendar.DAY_OF_MONTH)
     var city:String="Idleb"
-    val sdf = SimpleDateFormat("yyyy-MM-dd")
+    val sdf = SimpleDateFormat("dd-MM-yyyy")
     var list:ArrayList<SalatRecord> =ArrayList()
     var url =""
     var sqldal: SQLiteDAL =SQLiteDAL(null)
@@ -60,6 +62,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(perms, permsRequestCode)
         }
+        val frameAnimation: AnimationDrawable = linear.background as AnimationDrawable
+        frameAnimation.setEnterFadeDuration(2000);
+        frameAnimation.setExitFadeDuration(2000);
+        frameAnimation.start()
         // MobileAds.initialize(this,"ca-app-pub-8351493934827814~6188123033")
         //mAdView = findViewById(R.id.adView)
         //val adRequest = AdRequest.Builder().build()
@@ -73,16 +79,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         var salatRecord =  sqldal!!.getSalatRecord(currentDate)
         if(salatRecord==null){
             sqldal.ClearTable(SQLiteDAL.TABLE_Salah_Time)
-           // FillAllYearData(this)
             getListTimesFromApi(this,city,"Syria","2")
+        }else{
+            FillDataInView(salatRecord)
         }
 
+
         im_cal.setOnClickListener {
-            //calender() //calender dialoge
-            var salatRecord =  sqldal!!.getSalatRecord(currentDate)
-            if(salatRecord==null){
-                Log.d("","null")
-            }
+            calender() //calender dialoge
+
         }
 
         btn_city.setOnClickListener {
@@ -162,7 +167,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+   /* override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
         return true
@@ -180,7 +185,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             else -> return super.onOptionsItemSelected(item)
         }
         return super.onOptionsItemSelected(item)
-    }
+    }*/
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
@@ -255,7 +260,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     if (result != null) {
                         //Log.d("ayush: ", result.body().toString())
                         var modal: List<Datum> = result.body()!!.data
-                        for (j in 1 until modal.size) {
+                        for (j in 0 until modal.size) {
                             var date = modal.get(j).date.gregorian.date
                             var t_Imsak = modal.get(j).timings.Imsak.substring(0, 5)
                             var t_faj1 = modal.get(j).timings.Fajr.substring(0, 5)
@@ -324,13 +329,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         startActivity(Intent.createChooser(intent, R.string.share_.toString()))
 
     }
-    fun FillAllYearData(context: Context)
+    fun FillDataInView(salatRecord: SalatRecord)
     {
-        val salatRecords = ArrayList<SalatRecord>()
-        for(int in 1..2){
-            //salatRecords.add(getTimesFromApi(context,city,"Syria","2")!!)
-
-        }
-        Log.d("","")
+        t_imsak1.text = salatRecord.imsak
+        t_faj1.text = salatRecord.fajr
+        t_duha1.text = salatRecord.duha
+        t_dhuhor1.text = salatRecord.dhuhor
+        t_asr1.text = salatRecord.asr
+        t_moghrib1.text = salatRecord.moghrib
+        t_eshaa1.text = salatRecord.eshaa
     }
 }

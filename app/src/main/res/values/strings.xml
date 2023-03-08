@@ -1,22 +1,21 @@
 <resources>
-    <string name="app_name">Azan in Idleb</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Azan times In Idleb</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">about</string>
-    <string name="note">الأذان حسب التوقيت الموحد في إدلب وماحولها</string>
-    <string name="about">جاءت فكرة إنشاء هذا التطبيق بعد اعتماد توقيت موحد لجميع المدن والبلدات في المناطق المحررة ,
+    <string name="app_name">"Azan "</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="nav_header_title" translatable="false">Azan times In Idleb</string>
+    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
+    <string name="action_settings" translatable="false">about</string>
+    <string name="note" translatable="false">الأذان حسب التوقيت الموحد في إدلب وماحولها</string>
+    <string name="about" translatable="false">جاءت فكرة إنشاء هذا التطبيق بعد اعتماد توقيت موحد لجميع المدن والبلدات في المناطق المحررة ,
         ولمساعدة الأهالي بمعرفة أوقات الأذان في مدنهم وبلداتهم ,أسأل الله أن ينفع به المسلمين وأن يتقبل مني هذا العمل في
         صالح الأعمال ,
         لاتنسونا من صالح دعواتكم
     </string>
-    <string name="title_activity_popp">popp</string>
+    <string name="title_activity_popp" translatable="false">popp</string>
     <string name="develop">developer</string>
     <string name="share_">share using</string>
-    <string name="btn_view">View</string>
-    <string name="imsak">imsak</string>
+    <string name="imsak">Imsak</string>
     <string name="faj">Fajar</string>
     <string name="Shoroq">Sunset</string>
     <string name="dhuhor">Dhuhor</string>
@@ -25,22 +24,21 @@
     <string name="esh">Eshaa</string>
     <string name="com">To communicate with developer</string>
     <string name="azk1">أذكار مابعد الصلاة</string>
-    <string name="zeker1">أَسْـتَغْفِرُ الله، أَسْـتَغْفِرُ الله، أَسْـتَغْفِرُ الله,اللّهُـمَّ أَنْـتَ السَّلامُ ، وَمِـنْكَ السَّلام ، تَبارَكْتَ يا ذا الجَـلالِ وَالإِكْـرام
-        ُ</string>
+    <string name="zeker1">أَسْـتَغْفِرُ الله، أَسْـتَغْفِرُ الله، أَسْـتَغْفِرُ الله,اللّهُـمَّ أَنْـتَ السَّلامُ ، وَمِـنْكَ السَّلام ، تَبارَكْتَ يا ذا الجَـلالِ وَالإِكْـرام         ُ</string>
     <string name="zeker2">لا إلهَ إلاّ اللّهُ وحدَهُ لا شريكَ لهُ، لهُ المُـلْكُ ولهُ الحَمْد، وهوَ على كلّ شَيءٍ قَدير، اللّهُـمَّ لا مانِعَ لِما أَعْطَـيْت، وَلا مُعْطِـيَ لِما مَنَـعْت، وَلا يَنْفَـعُ ذا الجَـدِّ مِنْـكَ الجَـدُ</string>
-    <string name="zeker3">لا إلهَ إلاّ اللّه, وحدَهُ لا شريكَ لهُ، لهُ الملكُ ولهُ الحَمد، وهوَ على كلّ شيءٍ قدير، لا حَـوْلَ وَلا قـوَّةَ إِلاّ بِاللهِ، لا إلهَ إلاّ اللّـه، وَلا نَعْـبُـدُ إِلاّ إيّـاه, لَهُ النِّعْـمَةُ وَلَهُ الفَضْل وَلَهُ الثَّـناءُ الحَـسَن، لا إلهَ إلاّ اللّهُ مخْلِصـينَ لَـهُ الدِّينَ وَلَوْ كَـرِهَ الكـافِرون.</string>
-    <string name="zeker4">سُـبْحانَ اللهِ، والحَمْـدُ لله ، واللهُ أكْـبَر."33 مرة"</string>
-    <string name="zeker5">لا إلهَ إلاّ اللّهُ وَحْـدَهُ لا شريكَ لهُ، لهُ الملكُ ولهُ الحَمْد، وهُوَ على كُلّ شَيءٍ قَـدير. </string>
-    <string name="zeker6">بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم
+    <string name="zeker3" translatable="false">لا إلهَ إلاّ اللّه, وحدَهُ لا شريكَ لهُ، لهُ الملكُ ولهُ الحَمد، وهوَ على كلّ شيءٍ قدير، لا حَـوْلَ وَلا قـوَّةَ إِلاّ بِاللهِ، لا إلهَ إلاّ اللّـه، وَلا نَعْـبُـدُ إِلاّ إيّـاه, لَهُ النِّعْـمَةُ وَلَهُ الفَضْل وَلَهُ الثَّـناءُ الحَـسَن، لا إلهَ إلاّ اللّهُ مخْلِصـينَ لَـهُ الدِّينَ وَلَوْ كَـرِهَ الكـافِرون.</string>
+    <string name="zeker4" translatable="false">سُـبْحانَ اللهِ، والحَمْـدُ لله ، واللهُ أكْـبَر."33 مرة"</string>
+    <string name="zeker5" translatable="false">لا إلهَ إلاّ اللّهُ وَحْـدَهُ لا شريكَ لهُ، لهُ الملكُ ولهُ الحَمْد، وهُوَ على كُلّ شَيءٍ قَـدير. </string>
+    <string name="zeker6" translatable="false">بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم
         قُلْ هُوَ ٱللَّهُ أَحَدٌ، ٱللَّهُ ٱلصَّمَدُ، لَمْ يَلِدْ وَلَمْ يُولَدْ، وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ.</string>
-    <string name="zeker7">بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم
+    <string name="zeker7" translatable="false">بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم
         قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ، مِن شَرِّ مَا خَلَقَ، وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ، وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِى ٱلْعُقَدِ، وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ.</string>
-    <string name="zeker8">بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم
+    <string name="zeker8" translatable="false">بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم
         قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ، مَلِكِ ٱلنَّاسِ، إِلَٰهِ ٱلنَّاسِ، مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ، ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ، مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ.</string>
-    <string name="zeker9">أَعُوذُ بِاللهِ مِنْ الشَّيْطَانِ الرَّجِيمِ
+    <string name="zeker9" translatable="false">أَعُوذُ بِاللهِ مِنْ الشَّيْطَانِ الرَّجِيمِ
         اللّهُ لاَ إِلَـهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ لاَ تَأْخُذُهُ سِنَةٌ وَلاَ نَوْمٌ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الأَرْضِ مَن ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلاَّ بِإِذْنِهِ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلاَ يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلاَّ بِمَا شَاء وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالأَرْضَ وَلاَ يَؤُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ. </string>
     <string name="zeker10">لا إلهَ إلاّ اللّهُ وحْـدَهُ لا شريكَ لهُ، لهُ المُلكُ ولهُ الحَمْد، يُحيـي وَيُمـيتُ وهُوَ على كُلّ شيءٍ قدير.</string>
-
+    <string name="Communicate">Communicate</string>
 
 
 </resources>
