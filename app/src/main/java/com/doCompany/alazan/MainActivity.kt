@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -19,7 +21,6 @@ import androidx.preference.PreferenceManager
 import com.doCompany.alazan.Connection.SQLiteDAL
 import com.doCompany.alazan.Models.Datum
 import com.doCompany.alazan.Models.SalatRecord
-import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -41,6 +42,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     var d:Int = cal.get(Calendar.DAY_OF_MONTH)
     var city:String="Idleb"
     val sdf = SimpleDateFormat("yyyy-MM-dd")
+    var list:ArrayList<SalatRecord> =ArrayList()
+    var url =""
+    var sqldal: SQLiteDAL =SQLiteDAL(null)
+
+
     // val channel_ID="personal"
     val not_id=1
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,17 +66,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //mAdView.loadAd(adRequest)
         //setSupportActionBar(toolbar)
         //getUsers(city)
-        var url = "v1/calendarByCity/"+Constants.year+"/"+Constants.month
+        url = "v1/calendarByCity/"+Constants.year+"/"+Constants.month
         Constants.url=url
-        var sqldal: SQLiteDAL =SQLiteDAL(this)
+        sqldal =SQLiteDAL(this)
         val currentDate = sdf.format(Date())
-        var salatRecord =  sqldal!!.getSalatRecord("2023-03-07")
-        val salatRecor1= SalatRecord("2023-03-07","","","","","","","")
-        sqldal.addDay(salatRecor1)
-        //getTimesFromApi(this,city,"Syria","2")
+        var salatRecord =  sqldal!!.getSalatRecord(currentDate)
+        if(salatRecord==null){
+            sqldal.ClearTable(SQLiteDAL.TABLE_Salah_Time)
+           // FillAllYearData(this)
+            getListTimesFromApi(this,city,"Syria","2")
+        }
 
         im_cal.setOnClickListener {
-            calender() //calender dialoge
+            //calender() //calender dialoge
+            var salatRecord =  sqldal!!.getSalatRecord(currentDate)
+            if(salatRecord==null){
+                Log.d("","null")
+            }
         }
 
         btn_city.setOnClickListener {
@@ -222,30 +234,67 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         })
         queue.add(request)*/
 }
-    private fun getTimesFromApi(cotext:Context,city: String,country:String,method:String) {
+    private fun getListTimesFromApi(cotext:Context,city: String,country:String,method:String){
+        //var salatrecord: SalatRecord =SalatRecord(null,null,null,null,null,null,null,null)
+        list =ArrayList()
+        val pDialog: ProgressDialog
+        pDialog = ProgressDialog(cotext)
+        pDialog.setMessage("Loading...")
+        pDialog.setCancelable(false);
         try{
-            val quotesApi = RetrofitHelper.getInstance().create(QuotesApi::class.java)
             // launching a new coroutine
             GlobalScope.launch {
-                val result = quotesApi.getQuotes(Constants.url,city, country, method)
-                if (result != null) {
-                    Log.d("ayush: ", result.body().toString())
-                    var modal: List<Datum> = result.body()!!.data
-                    var date = modal.get(0).date.gregorian.date
-                    var t_Imsak = modal.get(0).timings.Imsak.substring(0, 5)
-                    var t_faj1 = modal.get(0).timings.Fajr.substring(0, 5)
-                    var t_duha = modal.get(0).timings.Sunrise.substring(0, 5)
-                    var t_dhuhor = modal.get(0).timings.Dhuhr.substring(0, 5)
-                    var t_asr = modal.get(0).timings.Asr.substring(0, 5)
-                    var t_moghrib = modal.get(0).timings.Maghrib.substring(0, 5)
-                    var t_eshaa = modal.get(0).timings.Isha.substring(0, 5)
-                    Log.d("result: ", " date: " + date +" t_faj1: "+ t_faj1 + " t_duha: "+t_duha+" t_dhuhor: "+t_dhuhor+" t_asr: "+t_asr+
-                            " t_moghrib: "+t_moghrib+" t_eshaa: "+t_eshaa)
+                val h = Handler(Looper.getMainLooper())
+                h.post(Runnable {
+                    pDialog.show()
+                })
+                for( i in 1..12) {
+                    url = "v1/calendarByCity/" + Constants.year + "/" + i
+                    val quotesApi = RetrofitHelper.getInstance().create(QuotesApi::class.java)
+                    val result = quotesApi.getQuotes(url, city, country, method)
+                    if (result != null) {
+                        //Log.d("ayush: ", result.body().toString())
+                        var modal: List<Datum> = result.body()!!.data
+                        for (j in 1 until modal.size) {
+                            var date = modal.get(j).date.gregorian.date
+                            var t_Imsak = modal.get(j).timings.Imsak.substring(0, 5)
+                            var t_faj1 = modal.get(j).timings.Fajr.substring(0, 5)
+                            var t_duha = modal.get(j).timings.Sunrise.substring(0, 5)
+                            var t_dhuhor = modal.get(j).timings.Dhuhr.substring(0, 5)
+                            var t_asr = modal.get(j).timings.Asr.substring(0, 5)
+                            var t_moghrib = modal.get(j).timings.Maghrib.substring(0, 5)
+                            var t_eshaa = modal.get(j).timings.Isha.substring(0, 5)
+                            list.add(
+                                SalatRecord(
+                                    date,
+                                    t_Imsak,
+                                    t_faj1,
+                                    t_duha,
+                                    t_dhuhor,
+                                    t_asr,
+                                    t_moghrib,
+                                    t_eshaa
+                                )
+                            )
+                            /*Log.d(
+                                "result: ",
+                                " date: " + date + " t_faj1: " + t_faj1 + " t_duha: " + t_duha + " t_dhuhor: " + t_dhuhor + " t_asr: " + t_asr +
+                                        " t_moghrib: " + t_moghrib + " t_eshaa: " + t_eshaa
+                            )*/
+                        }
+                    }
                 }
+                h.post(Runnable {
+                    pDialog.hide()
+                })
+                sqldal.addListOfDays(list)
             }
         }catch (exs:Exception){
             Log.d("ayush: ", exs as String)
+            pDialog.hide()
+            //return emptyList()
         }
+        //return list
     }
     fun calender()
     {
@@ -275,5 +324,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         startActivity(Intent.createChooser(intent, R.string.share_.toString()))
 
     }
+    fun FillAllYearData(context: Context)
+    {
+        val salatRecords = ArrayList<SalatRecord>()
+        for(int in 1..2){
+            //salatRecords.add(getTimesFromApi(context,city,"Syria","2")!!)
 
+        }
+        Log.d("","")
+    }
 }
