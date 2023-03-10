@@ -55,7 +55,6 @@ public class SQLiteDAL extends SQLiteOpenHelper {
         } catch (Exception ex) {
         }
     }
-
     public void addDay(SalatRecord salatRecord) {
         try {
             SQLiteDatabase db = getWritableDatabase();

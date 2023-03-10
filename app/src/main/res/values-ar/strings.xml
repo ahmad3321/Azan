@@ -15,4 +15,8 @@
     <string name="share_">مشاركة</string>
     <string name="develop">المطورون</string>
     <string name="Communicate">التواصل</string>
+    <string name="developers">المطورون</string>
+    <string name="voice">الصوت</string>
+    <string name="Notifications">التنبيهات</string>
+    <string name="Settings">الاعدادات</string>
 </resources>

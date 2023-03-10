@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:networkSecurityConfig="@xml/network_security_config"
-        android:usesCleartextTraffic="true"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AlAzan"
+        android:usesCleartextTraffic="true"
         tools:targetApi="32">
+        <activity
+            android:name=".SettingActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -31,20 +40,18 @@
             android:name=".popp"
             android:label="@string/title_activity_popp"
             android:screenOrientation="fullSensor"
-            android:theme="@style/pop">
-        </activity>
+            android:theme="@style/pop"></activity>
         <activity
             android:name=".developer"
             android:label="@string/title_activity_popp"
             android:screenOrientation="fullSensor"
-            android:theme="@style/pop">
-        </activity>
+            android:theme="@style/pop"></activity>
+
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-8351493934827814~6188123033"/>
-        <activity
-            android:name=".Azkar_1">
-        </activity>
+            android:value="ca-app-pub-8351493934827814~6188123033" />
+
+        <activity android:name=".Azkar_1"></activity>
     </application>
 
 </manifest>

@@ -6,6 +6,21 @@ plugins {
 }
 
 android {
+
+    signingConfigs {
+        debug {
+            keyAlias 'key_azan'
+            storeFile file('C:\\Users\\Yahya\\AndroidStudioProjects\\key_Azan.jks')
+            storePassword 'azan123'
+            keyPassword 'azan123'
+        }
+        release {
+            keyAlias 'key_azan'
+            storeFile file('C:\\Users\\Yahya\\AndroidStudioProjects\\key_Azan.jks')
+            storePassword 'azan123'
+            keyPassword 'azan123'
+        }
+    }
     namespace 'com.doCompany.alazan'
     compileSdk 33
 
@@ -20,9 +35,18 @@ android {
     }
 
     buildTypes {
-        release {
-            minifyEnabled true
+        debug {
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        lintOptions {
+
+            checkReleaseBuilds false
+
         }
     }
     compileOptions {
