@@ -36,20 +36,20 @@ import java.util.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-    lateinit var mAdView : AdView
-    var cal= Calendar.getInstance()
-    var y:Int = cal.get(Calendar.YEAR)
-    var m:Int = cal.get(Calendar.MONTH+1)
-    var d:Int = cal.get(Calendar.DAY_OF_MONTH)
-    var city:String="Idleb"
+    lateinit var mAdView: AdView
+    var cal = Calendar.getInstance()
+    var y: Int = cal.get(Calendar.YEAR)
+    var m: Int = cal.get(Calendar.MONTH + 1)
+    var d: Int = cal.get(Calendar.DAY_OF_MONTH)
+    var city: String = "Idleb"
     val sdf = SimpleDateFormat("dd-MM-yyyy")
-    var list:ArrayList<SalatRecord> =ArrayList()
-    var url =""
-    var sqldal: SQLiteDAL =SQLiteDAL(null)
+    var list: ArrayList<SalatRecord> = ArrayList()
+    var url = ""
+    var sqldal: SQLiteDAL = SQLiteDAL(null)
     var ChooseDate = ""
 
     // val channel_ID="personal"
-    val not_id=1
+    val not_id = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -74,35 +74,39 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //getUsers(city)
         val sharedPreference = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
         var sh_city = sharedPreference.getString("city_Arabic", "")
-        if(sh_city ==null || sh_city ==""){
+        if (sh_city == null || sh_city == "") {
             city = "Idleb"
             txt_city.setText("إدلب")
-        }
-        else {
+        } else {
             city = sh_city
             txt_city.setText(city)
         }
-        url = "v1/calendarByCity/"+Constants.year+"/"+Constants.month
-        Constants.url=url
-        sqldal =SQLiteDAL(this)
+        url = "v1/calendarByCity/" + Constants.year + "/" + Constants.month
+        Constants.url = url
+        sqldal = SQLiteDAL(this)
         ChooseDate = sdf.format(Date())
-        var salatRecord =  sqldal!!.getSalatRecord(ChooseDate)
-        if(salatRecord==null){
+        var salatRecord = sqldal!!.getSalatRecord(ChooseDate)
+        if (salatRecord == null) {
             sqldal.ClearTable(SQLiteDAL.TABLE_Salah_Time)
-            getListTimesFromApi(this,city,"Syria","2")
-        }else{
+            getListTimesFromApi(this, city, "Syria", "2")
+        } else {
             FillDataInView(salatRecord)
         }
         im_cal.setOnClickListener {
             calender(this) //calender dialoge
         }
         val toggle = ActionBarDrawerToggle(
-            this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+            this,
+            drawer_layout,
+            toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         )
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
         nav_view.setNavigationItemSelectedListener(this)
     }
+
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
@@ -115,7 +119,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.azk1 ->
-                startActivity(Intent(this,Azkar_1::class.java))
+                startActivity(Intent(this, Azkar_1::class.java))
             R.id.nav_share -> {
                 share()
             }
@@ -135,14 +139,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
-    fun getUsers(city:String) {
+    fun getUsers(city: String) {
         // Instantiate the RequestQueue.
         val pDialog: ProgressDialog
         pDialog = ProgressDialog(this)
         pDialog.setMessage("Loading...")
         pDialog.show()
         //val queue = Volley.newRequestQueue(applicationContext)
-       // geet(url,applicationContext)
+        // geet(url,applicationContext)
         // Request a string response from the provided URL.
 
         /*val request = JsonObjectRequest(Request.Method.GET, url, null,
@@ -170,22 +174,28 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             Log.e("TAG", "RESPONSE IS $error")
         })
         queue.add(request)*/
-}
-    private fun getListTimesFromApi(cotext:Context,city: String,country:String,method:String){
+    }
+
+    private fun getListTimesFromApi(
+        cotext: Context,
+        city: String,
+        country: String,
+        method: String
+    ) {
         //var salatrecord: SalatRecord =SalatRecord(null,null,null,null,null,null,null,null)
-        list =ArrayList()
+        list = ArrayList()
         val pDialog: ProgressDialog
         pDialog = ProgressDialog(cotext)
         pDialog.setMessage("Loading...")
         pDialog.setCancelable(false);
-        try{
+        try {
             // launching a new coroutine
             GlobalScope.launch {
                 val h = Handler(Looper.getMainLooper())
                 h.post(Runnable {
                     pDialog.show()
                 })
-                for( i in 1..12) {
+                for (i in 1..12) {
                     url = "v1/calendarByCity/" + Constants.year + "/" + i
                     val quotesApi = RetrofitHelper.getInstance().create(QuotesApi::class.java)
                     val result = quotesApi.getQuotes(url, city, country, method)
@@ -220,55 +230,65 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     pDialog.hide()
                 })
                 sqldal.addListOfDays(list)
-                var salatRecord =  sqldal!!.getSalatRecord(ChooseDate)
+                var salatRecord = sqldal!!.getSalatRecord(ChooseDate)
                 FillDataInView(salatRecord)
             }
-        }catch (exs:Exception){
+        } catch (exs: Exception) {
             Log.d("ayush: ", exs as String)
             pDialog.hide()
             //return emptyList()
         }
         //return list
     }
-    fun calender(context: Context)
-    {
-        var date =object: DatePickerDialog.OnDateSetListener{
+
+    fun calender(context: Context) {
+        var date = object : DatePickerDialog.OnDateSetListener {
             override fun onDateSet(p0: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
                 val calendar = Calendar.getInstance()
-                if(year!=calendar.get(Calendar.YEAR)){
-                    Toast.makeText(applicationContext, "السنة مختلفة عن السنة الحالية", Toast.LENGTH_SHORT).show()
+                if (year != calendar.get(Calendar.YEAR)) {
+                    Toast.makeText(
+                        applicationContext,
+                        "السنة مختلفة عن السنة الحالية",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     return
                 }
-                cal.set(Calendar.YEAR,calendar.get(Calendar.YEAR))
-                cal.set(Calendar.MONTH,month)
-                cal.set(Calendar.DAY_OF_MONTH,dayOfMonth)
+                cal.set(Calendar.YEAR, calendar.get(Calendar.YEAR))
+                cal.set(Calendar.MONTH, month)
+                cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                 //y=calendar.get(Calendar.YEAR)
                 //m=month+1
                 //d=dayOfMonth
                 ChooseDate = sdf.format(cal.time)
-                var salatRecord =  sqldal!!.getSalatRecord(ChooseDate)
-                if(salatRecord==null){
+                var salatRecord = sqldal!!.getSalatRecord(ChooseDate)
+                if (salatRecord == null) {
                     sqldal.ClearTable(SQLiteDAL.TABLE_Salah_Time)
-                    getListTimesFromApi(context,city,"Syria","2")
-                }else{
+                    getListTimesFromApi(context, city, "Syria", "2")
+                } else {
                     FillDataInView(salatRecord)
                 }
             }
         }
-        DatePickerDialog(this,date,cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH)).show()
+        DatePickerDialog(
+            this,
+            date,
+            cal.get(Calendar.YEAR),
+            cal.get(Calendar.MONTH),
+            cal.get(Calendar.DAY_OF_MONTH)
+        ).show()
     }
-    fun share()
-    {
-        var intent= Intent(Intent.ACTION_SEND).setType("text/plain")
-        var body="https://play.google.com/store/apps/details?id=com.agha.azan"
-        var sub="تطبيق الأذان في المحرر"
-        intent.putExtra(Intent.EXTRA_SUBJECT,sub)
-        intent.putExtra(Intent.EXTRA_TEXT,body)
+
+    fun share() {
+        var intent = Intent(Intent.ACTION_SEND).setType("text/plain")
+        var body = "https://play.google.com/store/apps/details?id=com.agha.azan"
+        var sub = "تطبيق الأذان في المحرر"
+        intent.putExtra(Intent.EXTRA_SUBJECT, sub)
+        intent.putExtra(Intent.EXTRA_TEXT, body)
         startActivity(Intent.createChooser(intent, R.string.share_.toString()))
 
     }
-    fun FillDataInView(salatRecord: SalatRecord)
-    {
+
+    fun FillDataInView(salatRecord: SalatRecord) {
         t_imsak1.text = salatRecord.imsak
         t_faj1.text = salatRecord.fajr
         t_duha1.text = salatRecord.duha
@@ -277,22 +297,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         t_moghrib1.text = salatRecord.moghrib
         t_eshaa1.text = salatRecord.eshaa
     }
+
     private fun showPopup(view: View) {
-        val popup= PopupMenu(this,view)
+        val popup = PopupMenu(this, view)
         popup.inflate(R.menu.items)
 
         popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item: MenuItem? ->
-           /* var bool:Boolean  =false;
-            val alertbox = AlertDialog.Builder(this)
-            alertbox.setTitle("تأكيد")
-            alertbox.setMessage("هل تريد حفظ المعلومات؟")
-            alertbox.setPositiveButton(
-                "نعم"
-            ) { arg0, arg1 -> bool =true}
-            alertbox.setNegativeButton(
-                "لا"
-            ) { arg0, arg1 -> return@setNegativeButton }
-            alertbox.show()*/
+            /* var bool:Boolean  =false;
+             val alertbox = AlertDialog.Builder(this)
+             alertbox.setTitle("تأكيد")
+             alertbox.setMessage("هل تريد حفظ المعلومات؟")
+             alertbox.setPositiveButton(
+                 "نعم"
+             ) { arg0, arg1 -> bool =true}
+             alertbox.setNegativeButton(
+                 "لا"
+             ) { arg0, arg1 -> return@setNegativeButton }
+             alertbox.show()*/
 
             when (item!!.title) {
                 "إدلب" -> {
@@ -330,25 +351,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             var sh_city = sharedPreference.getString("city", "")
             if (sh_city == city) {
 
-            } else{
+            } else {
                 txt_city.setText(item!!.title)
-            sqldal.ClearTable(SQLiteDAL.TABLE_Salah_Time)
-            var salatRecord = sqldal!!.getSalatRecord(ChooseDate)
-            getListTimesFromApi(this, city, "Syria", "2")
-            try {
-                val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
+                sqldal.ClearTable(SQLiteDAL.TABLE_Salah_Time)
+                var salatRecord = sqldal!!.getSalatRecord(ChooseDate)
+                getListTimesFromApi(this, city, "Syria", "2")
+                try {
+                    val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
 
-                val myEdit = sharedPreferences.edit()
-                // Storing the key and its value as the data fetched from edittext
-                myEdit.putString("city", city)
-                myEdit.putString("city_Arabic", item!!.title.toString())
-                myEdit.apply()
-            } catch (e: GeneralSecurityException) {
-                e.printStackTrace()
-            } catch (e: IOException) {
-                e.printStackTrace()
+                    val myEdit = sharedPreferences.edit()
+                    // Storing the key and its value as the data fetched from edittext
+                    myEdit.putString("city", city)
+                    myEdit.putString("city_Arabic", item!!.title.toString())
+                    myEdit.apply()
+                } catch (e: GeneralSecurityException) {
+                    e.printStackTrace()
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
             }
-        }
             true
         })
 
