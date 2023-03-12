@@ -6,15 +6,15 @@ import android.util.DisplayMetrics
 import com.doCompany.alazan.R
 
 
-class developer: Activity() {
+class developer : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.developer)
-       var s: DisplayMetrics = DisplayMetrics()
+        var s: DisplayMetrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(s)
-        var width=s.widthPixels
-        var hei=s.heightPixels
-        window.setLayout(((width*0.8).toInt()),(hei*0.6).toInt())
+        var width = s.widthPixels
+        var hei = s.heightPixels
+        window.setLayout(((width * 0.8).toInt()), (hei * 0.6).toInt())
     }
 
 }

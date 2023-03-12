@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -52,6 +54,8 @@
             android:value="ca-app-pub-8351493934827814~6188123033" />
 
         <activity android:name=".Azkar_1"></activity>
+
+        <receiver android:name=".Alarm.AlarmBroadcastReceiver"/>
     </application>
 
 </manifest>
