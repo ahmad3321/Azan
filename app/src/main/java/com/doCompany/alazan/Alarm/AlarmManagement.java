@@ -29,12 +29,20 @@ public class AlarmManagement {
         long afterMilliSeconds = salatDate.getTime() - currentTime.getTime();
 
         Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
-        PendingIntent pendingIntent;
-        pendingIntent = PendingIntent.getBroadcast(
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 context.getApplicationContext(), 234324243, intent, PendingIntent.FLAG_IMMUTABLE);
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
                 + afterMilliSeconds, pendingIntent);
+    }
+
+    public static void cancleAlarm(Context context) {
+        Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                context.getApplicationContext(), 234324243, intent, PendingIntent.FLAG_IMMUTABLE);
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.cancel(pendingIntent);
     }
 }
