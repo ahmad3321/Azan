@@ -7,7 +7,11 @@ import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.widget.Toast;
 
+import com.doCompany.alazan.MainActivity;
 import com.doCompany.alazan.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AlarmBroadcastReceiver extends BroadcastReceiver {
     MediaPlayer mp;
@@ -19,6 +23,9 @@ public class AlarmBroadcastReceiver extends BroadcastReceiver {
             mp = MediaPlayer.create(context, R.raw.azan);
             mp.start();
         }
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        MainActivity.MyCompanion.setNextAlarm(context.getApplicationContext(), sdf.format(new Date()));
 
         Toast.makeText(context, "حان موعد الأذان", Toast.LENGTH_LONG).show();
     }

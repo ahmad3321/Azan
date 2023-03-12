@@ -7,20 +7,20 @@ plugins {
 
 android {
 
-    signingConfigs {
-        debug {
-            keyAlias 'key_azan'
-            storeFile file('C:\\Users\\Yahya\\AndroidStudioProjects\\key_Azan.jks')
-            storePassword 'azan123'
-            keyPassword 'azan123'
-        }
-        release {
-            keyAlias 'key_azan'
-            storeFile file('C:\\Users\\Yahya\\AndroidStudioProjects\\key_Azan.jks')
-            storePassword 'azan123'
-            keyPassword 'azan123'
-        }
-    }
+//    signingConfigs {
+//        debug {
+//            keyAlias 'key_azan'
+//            storeFile file('C:\\Users\\Yahya\\AndroidStudioProjects\\key_Azan.jks')
+//            storePassword 'azan123'
+//            keyPassword 'azan123'
+//        }
+//        release {
+//            keyAlias 'key_azan'
+//            storeFile file('C:\\Users\\Yahya\\AndroidStudioProjects\\key_Azan.jks')
+//            storePassword 'azan123'
+//            keyPassword 'azan123'
+//        }
+//    }
     namespace 'com.doCompany.alazan'
     compileSdk 33
 

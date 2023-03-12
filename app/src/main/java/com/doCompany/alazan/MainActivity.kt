@@ -1,6 +1,6 @@
 package com.doCompany.alazan
 
-import android.app.AlertDialog
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.ProgressDialog
 import android.content.Context
@@ -19,6 +19,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import com.doCompany.alazan.Alarm.AlarmManagement
 import com.doCompany.alazan.Connection.SQLiteDAL
 import com.doCompany.alazan.Models.Datum
 import com.doCompany.alazan.Models.SalatRecord
@@ -89,6 +90,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (salatRecord == null) {
             sqldal.ClearTable(SQLiteDAL.TABLE_Salah_Time)
             getListTimesFromApi(this, city, "Syria", "2")
+
         } else {
             FillDataInView(salatRecord)
         }
@@ -232,6 +234,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 sqldal.addListOfDays(list)
                 var salatRecord = sqldal!!.getSalatRecord(ChooseDate)
                 FillDataInView(salatRecord)
+                setNextAlarm(applicationContext, salatRecord.date)
+
             }
         } catch (exs: Exception) {
             Log.d("ayush: ", exs as String)
@@ -364,6 +368,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     myEdit.putString("city", city)
                     myEdit.putString("city_Arabic", item!!.title.toString())
                     myEdit.apply()
+
+                    AlarmManagement.cancleAlarm(this.applicationContext)
                 } catch (e: GeneralSecurityException) {
                     e.printStackTrace()
                 } catch (e: IOException) {
@@ -374,5 +380,97 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         })
 
         popup.show()
+    }
+
+    companion object MyCompanion {
+
+        @SuppressLint("SimpleDateFormat")
+        fun setNextAlarm(context: Context, date: String) {
+            val qlitDal = SQLiteDAL(context)
+            val sdf1 = SimpleDateFormat("dd-MM-yyyy")
+            val salatRecord = qlitDal.getSalatRecord(date)
+
+            val calendar = Calendar.getInstance()
+            val hour = calendar.get(Calendar.HOUR_OF_DAY)
+            val minute = calendar.get(Calendar.MINUTE)
+
+            val formatter = SimpleDateFormat("dd-MM-yyyy HH:mm") // Your custom date-time format
+            var dateTimeString = ""
+
+            if (hour < Integer.parseInt(salatRecord.imsak.substring(0, 2))
+                || (hour == Integer.parseInt(salatRecord.imsak.substring(0, 2))
+                        && minute < Integer.parseInt(salatRecord.imsak.substring(3)) - 5
+                        )
+            ) {
+                dateTimeString = sdf1.format(Date()) + " " + salatRecord.imsak.substring(
+                    0,
+                    2
+                ) + ":" + salatRecord.imsak.substring(3)
+            } else if (hour < Integer.parseInt(salatRecord.fajr.substring(0, 2))
+                || (hour == Integer.parseInt(salatRecord.fajr.substring(0, 2))
+                        && minute < Integer.parseInt(salatRecord.fajr.substring(3)) - 5
+                        )
+            ) {
+                dateTimeString = sdf1.format(Date()) + " " + salatRecord.fajr.substring(
+                    0,
+                    2
+                ) + ":" + salatRecord.fajr.substring(3)
+
+            } else if (hour < Integer.parseInt(salatRecord.dhuhor.substring(0, 2))
+                || (hour == Integer.parseInt(salatRecord.dhuhor.substring(0, 2))
+                        && minute < Integer.parseInt(salatRecord.dhuhor.substring(3)) - 5
+                        )
+            ) {
+                dateTimeString = sdf1.format(Date()) + " " + salatRecord.dhuhor.substring(
+                    0,
+                    2
+                ) + ":" + salatRecord.dhuhor.substring(3)
+            } else if (hour < Integer.parseInt(salatRecord.asr.substring(0, 2))
+                || (hour == Integer.parseInt(salatRecord.asr.substring(0, 2))
+                        && minute < Integer.parseInt(salatRecord.asr.substring(3)) - 5
+                        )
+            ) {
+                dateTimeString = sdf1.format(Date()) + " " + salatRecord.asr.substring(
+                    0,
+                    2
+                ) + ":" + salatRecord.asr.substring(3)
+            } else if (hour < Integer.parseInt(salatRecord.moghrib.substring(0, 2))
+                || (hour == Integer.parseInt(salatRecord.moghrib.substring(0, 2))
+                        && minute < Integer.parseInt(salatRecord.moghrib.substring(3)) - 5
+                        )
+            ) {
+                dateTimeString = sdf1.format(Date()) + " " + salatRecord.moghrib.substring(
+                    0,
+                    2
+                ) + ":" + salatRecord.moghrib.substring(3)
+
+            } else if (hour < Integer.parseInt(salatRecord.eshaa.substring(0, 2))
+                || (hour == Integer.parseInt(salatRecord.eshaa.substring(0, 2))
+                        && minute < Integer.parseInt(salatRecord.eshaa.substring(3)) - 5
+                        )
+            ) {
+                dateTimeString = sdf1.format(Date()) + " " + salatRecord.eshaa.substring(
+                    0,
+                    2
+                ) + ":" + salatRecord.eshaa.substring(3)
+            }
+
+            //if after eshaa, then set imsak for the next day
+            else {
+                val today = formatter.parse(dateTimeString)
+                val calendar = Calendar.getInstance()
+
+                calendar.setTime(today)
+                calendar.add(Calendar.DAY_OF_YEAR, 1)
+
+                val tomorrwo = calendar.time
+                val salatRecord_tomorrwo = qlitDal.getSalatRecord(sdf1.format(tomorrwo))
+                dateTimeString = sdf1.format(Date()) + " " + salatRecord_tomorrwo.imsak.substring(
+                    0,
+                    2
+                ) + ":" + salatRecord_tomorrwo.imsak.substring(3)
+            }
+            AlarmManagement.setAlarmAt(context, formatter.parse(dateTimeString))
+        }
     }
 }
