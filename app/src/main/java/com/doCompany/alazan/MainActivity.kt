@@ -7,6 +7,8 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -89,6 +91,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         var salatRecord = sqldal!!.getSalatRecord(ChooseDate)
         if (salatRecord == null) {
             sqldal.ClearTable(SQLiteDAL.TABLE_Salah_Time)
+            if(!isDeviceOnline(this)){
+                Toast.makeText(this,"لا يوجد اتصال بالانترنت",Toast.LENGTH_SHORT).show()
+                return
+            }
             getListTimesFromApi(this, city, "Syria", "3")
 
         } else {
@@ -197,6 +203,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         try {
             // launching a new coroutine
             GlobalScope.launch {
+
                 val h = Handler(Looper.getMainLooper())
                 h.post(Runnable {
                     pDialog.show()
@@ -479,6 +486,29 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 AlarmManagement.setAlarmAt(context, formatter.parse(dateTimeString))
             } catch (ex: Exception) {
                 // Toast.makeText(context,"حدث خطأ ما",Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+    private fun isDeviceOnline(context: Context): Boolean {
+        val connManager = context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val networkCapabilities = connManager.getNetworkCapabilities(connManager.activeNetwork)
+            if (networkCapabilities == null) {
+                Log.d("tagLog", "Device Offline")
+                return false
+            } else {
+                Log.d("tagLog", "Device Online")
+                return true
+            }
+        } else {
+            // below Marshmallow
+            val activeNetwork = connManager.activeNetworkInfo
+            if (activeNetwork?.isConnectedOrConnecting == true && activeNetwork.isAvailable) {
+                Log.d("tagLog", "Device Online")
+                return true
+            } else {
+                Log.d("tagLog", "Device Offline")
+                return false
             }
         }
     }
