@@ -65,7 +65,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.media.VOLUME_CHANGED_ACTION" />
-                <action android:name="com.doCompany.alazan.Alarm.ALARM_TRIGGERED" />
             </intent-filter>
         </receiver>
     </application>

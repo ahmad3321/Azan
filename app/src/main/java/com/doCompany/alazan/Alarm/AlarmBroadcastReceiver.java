@@ -19,13 +19,7 @@ public class AlarmBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (intent.getAction().equals("android.media.VOLUME_CHANGED_ACTION")) {
-            if (mp != null) {
-                mp.stop();
-                mp.release();
-                mp = null;
-            }
-        } else {
+        if (intent.getAction()==null){
             SharedPreferences prefs = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
             if (prefs.getBoolean("enable_voice", true)) {
                 mp = MediaPlayer.create(context, R.raw.azan);
@@ -36,6 +30,13 @@ public class AlarmBroadcastReceiver extends BroadcastReceiver {
             MainActivity.MyCompanion.setNextAlarm(context.getApplicationContext(), sdf.format(new Date()));
 
             Toast.makeText(context, "حان موعد الأذان", Toast.LENGTH_LONG).show();
+        }
+        else if(intent.getAction().equals("android.media.VOLUME_CHANGED_ACTION")) {
+            if (mp != null) {
+                mp.stop();
+                mp.release();
+                mp = null;
+            }
         }
     }
 }
