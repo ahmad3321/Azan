@@ -399,7 +399,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val minute = calendar.get(Calendar.MINUTE)
 
                 val formatter =
-                    SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.US) // Your custom date-time format
+                    SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.US)
                 var dateTimeString = ""
 
                 if (hour < Integer.parseInt(salatRecord.imsak.substring(0, 2))
