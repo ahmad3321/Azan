@@ -8,7 +8,7 @@
             <menu>
                 <item
                     android:id="@+id/item_city"
-                    android:icon="@drawable/ic_mos"
+                    android:icon="@drawable/ic_baseline_location_city_24"
                     android:title="اختر مدينتك"
                     />
 

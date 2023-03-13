@@ -2,67 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/loginParent"
+    android:background="@drawable/back_developer"
+    android:gravity="center"
     android:orientation="vertical">
-
-        <ScrollView style="@style/parent" android:id="@+id/s1">
-
-
-            <RelativeLayout style="@style/parent">
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentTop="true"
-                    android:weightSum="12">
-
-                    <LinearLayout
-                        style="@style/parent"
-                        android:layout_weight="3"
-                        android:background="@drawable/shape"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            style="@style/parent"
-                            android:background="@drawable/shape"
-
-                            android:contentDescription="login background" />
-
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginRight="30dp"
-                    android:orientation="vertical">
-
-
-                    <TextView
-                        style="@style/headerText"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="40dp"
-                        android:fontFamily="@font/jaz"
-                        android:text="المطورون"
-                        android:textSize="35sp" />
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-        </ScrollView>
 
     <TextView
         android:id="@+id/textt"
         style="@style/headerText"
-        android:layout_below="@+id/s1"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/jaz"
+        android:fontFamily="@font/ges"
         android:inputType="textMultiLine"
         android:lineHeight="50dp"
         android:text="@string/develop"
@@ -96,7 +45,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/jaz"
-        android:text="للتواصل"
+        android:text="@string/Communicate"
         android:textColor="@color/black"
         android:textSize="25sp" />
     <TextView

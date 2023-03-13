@@ -34,4 +34,4 @@
 -keep class com.doCompany.alazan.QuotesApi
 -keep class com.doCompany.alazan.Models.** { *; }
 -keep class com.doCompany.alazan.RetrofitHelper
--keep class com.doCompany.alazan.Constants
+-keep class com.doCompany.alazan.Constants.**
