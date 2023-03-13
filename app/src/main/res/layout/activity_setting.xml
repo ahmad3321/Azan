@@ -21,24 +21,11 @@
         <Switch
             android:id="@+id/Voice"
             style="@style/settingsText"
-            android:drawableLeft="@drawable/ic_baseline_voice_over_off_24"
+            android:drawableStart="@drawable/ic_baseline_voice_over_off_24"
             android:fontFamily="@font/ges"
+            android:checked="true"
             android:text="@string/voice" />
 
-        <TextView
-            style="@style/viewParent.headerText.settingsMiniTitle"
-            android:text="Profile"/>
-
-        <TextView
-            style="@style/viewParent.headerText.settingsTextIcon"
-            android:drawableLeft="@drawable/ic_edit_profile"
-            android:text="Edit Profile" />
-
-        <TextView
-            style="@style/viewParent.headerText.settingsTextIcon"
-            android:drawableLeft="@drawable/ic_edit_password"
-            android:layout_marginTop="10dp"
-            android:text="Change Password" />
 
         <TextView
             style="@style/viewParent.headerText.settingsMiniTitle"
@@ -47,8 +34,9 @@
         <Switch
             style="@style/settingsText"
             android:checked="true"
-            android:drawableLeft="@drawable/ic_notifications"
+            android:drawableStart="@drawable/ic_notifications"
             android:fontFamily="@font/ges"
+            android:enabled="false"
             android:text="@string/Notifications" />
 
         <TextView
@@ -61,7 +49,12 @@
             android:text="Language" />
 
 
-
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/logo"/>
         <TextView
             style="@style/viewParent.headerText.settingsMiniTitle"
             android:text="App ver 1.0.0"

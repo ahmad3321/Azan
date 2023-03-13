@@ -43,14 +43,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     var m: Int = cal.get(Calendar.MONTH + 1)
     var d: Int = cal.get(Calendar.DAY_OF_MONTH)
     var city: String = "Idleb"
-    val sdf = SimpleDateFormat("dd-MM-yyyy")
+    val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.US)
     var list: ArrayList<SalatRecord> = ArrayList()
     var url = ""
     var sqldal: SQLiteDAL = SQLiteDAL(null)
     var ChooseDate = ""
 
-    // val channel_ID="personal"
-    val not_id = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -89,7 +87,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         var salatRecord = sqldal!!.getSalatRecord(ChooseDate)
         if (salatRecord == null) {
             sqldal.ClearTable(SQLiteDAL.TABLE_Salah_Time)
-            getListTimesFromApi(this, city, "Syria", "2")
+            getListTimesFromApi(this, city, "Syria", "3")
 
         } else {
             FillDataInView(salatRecord)
@@ -134,6 +132,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_developer -> {
                 val intent = Intent(this, developer::class.java)
+                startActivity(intent)
+            }
+            R.id.nav_setting -> {
+                val intent = Intent(this, SettingActivity::class.java)
                 startActivity(intent)
             }
         }
@@ -188,7 +190,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         list = ArrayList()
         val pDialog: ProgressDialog
         pDialog = ProgressDialog(cotext)
-        pDialog.setMessage("Loading...")
+        pDialog.setMessage("جاري تحميل مواقيت الأذان ..")
         pDialog.setCancelable(false);
         try {
             // launching a new coroutine
@@ -235,7 +237,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 var salatRecord = sqldal!!.getSalatRecord(ChooseDate)
                 FillDataInView(salatRecord)
                 setNextAlarm(applicationContext, salatRecord.date)
-
             }
         } catch (exs: Exception) {
             Log.d("ayush: ", exs as String)
@@ -267,7 +268,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 var salatRecord = sqldal!!.getSalatRecord(ChooseDate)
                 if (salatRecord == null) {
                     sqldal.ClearTable(SQLiteDAL.TABLE_Salah_Time)
-                    getListTimesFromApi(context, city, "Syria", "2")
+                    getListTimesFromApi(context, city, "Syria", "3")
                 } else {
                     FillDataInView(salatRecord)
                 }
@@ -359,7 +360,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 txt_city.setText(item!!.title)
                 sqldal.ClearTable(SQLiteDAL.TABLE_Salah_Time)
                 var salatRecord = sqldal!!.getSalatRecord(ChooseDate)
-                getListTimesFromApi(this, city, "Syria", "2")
+                getListTimesFromApi(this, city, "Syria", "3")
                 try {
                     val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
 
@@ -386,15 +387,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         @SuppressLint("SimpleDateFormat")
         fun setNextAlarm(context: Context, date: String) {
-            val qlitDal = SQLiteDAL(context)
-            val sdf1 = SimpleDateFormat("dd-MM-yyyy")
+            try{
+                val qlitDal = SQLiteDAL(context)
+            val sdf1 = SimpleDateFormat("dd-MM-yyyy", Locale.US)
             val salatRecord = qlitDal.getSalatRecord(date)
 
             val calendar = Calendar.getInstance()
             val hour = calendar.get(Calendar.HOUR_OF_DAY)
             val minute = calendar.get(Calendar.MINUTE)
 
-            val formatter = SimpleDateFormat("dd-MM-yyyy HH:mm") // Your custom date-time format
+            val formatter = SimpleDateFormat("dd-MM-yyyy HH:mm",Locale.US) // Your custom date-time format
             var dateTimeString = ""
 
             if (hour < Integer.parseInt(salatRecord.imsak.substring(0, 2))
@@ -471,6 +473,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 ) + ":" + salatRecord_tomorrwo.imsak.substring(3)
             }
             AlarmManagement.setAlarmAt(context, formatter.parse(dateTimeString))
+        }catch (ex:Exception){
+           // Toast.makeText(context,"حدث خطأ ما",Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

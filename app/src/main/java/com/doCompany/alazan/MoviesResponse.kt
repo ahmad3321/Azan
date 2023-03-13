@@ -8,7 +8,6 @@ import retrofit2.http.Url
 
 
 interface QuotesApi {
-    //@GET("v1/calendarByCity/2023/4")
     @GET
     suspend fun getQuotes(
         @Url url:String,

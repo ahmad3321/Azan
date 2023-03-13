@@ -7,9 +7,7 @@
     <string name="nav_header_desc" translatable="false">Navigation header</string>
     <string name="action_settings" translatable="false">about</string>
     <string name="note" translatable="false">الأذان حسب التوقيت الموحد في إدلب وماحولها</string>
-    <string name="about" translatable="false">جاءت فكرة إنشاء هذا التطبيق بعد اعتماد توقيت موحد لجميع المدن والبلدات في المناطق المحررة ,
-        ولمساعدة الأهالي بمعرفة أوقات الأذان في مدنهم وبلداتهم ,أسأل الله أن ينفع به المسلمين وأن يتقبل مني هذا العمل في
-        صالح الأعمال ,
+    <string name="about" translatable="false">جاءت فكرة إنشاء هذا التطبيق لتسهيل وصول أهلنا في المناطق المحررة لأوقات الأذان حسب التوقيت المعتمد ,
         لاتنسونا من صالح دعواتكم
     </string>
     <string name="title_activity_popp" translatable="false">popp</string>

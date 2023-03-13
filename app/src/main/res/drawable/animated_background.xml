@@ -3,8 +3,8 @@
     android:oneshot="false">
     <item android:drawable="@drawable/asd"
         android:duration="5000"/>
-<!--    <item android:drawable="@drawable/asd1"-->
-<!--        android:duration="4000"/>-->
-<!--    <item android:drawable="@drawable/asd2"-->
-<!--        android:duration="3000"/>-->
+ <item android:drawable="@drawable/asd1"
+       android:duration="4000"/>
+  <item android:drawable="@drawable/asd2"
+       android:duration="3000"/>
 </animation-list>

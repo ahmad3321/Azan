@@ -42,12 +42,12 @@
             android:name=".popp"
             android:label="@string/title_activity_popp"
             android:screenOrientation="fullSensor"
-            android:theme="@style/pop"></activity>
+            android:theme="@style/pop" />
         <activity
             android:name=".developer"
             android:label="@string/title_activity_popp"
             android:screenOrientation="fullSensor"
-            android:theme="@style/pop"></activity>
+            android:theme="@style/pop" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
