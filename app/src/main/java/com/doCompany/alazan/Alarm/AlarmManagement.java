@@ -15,7 +15,7 @@ import java.util.Date;
 public class AlarmManagement {
 
     public static void setAlarmAfter(Context context, long afterSeconds) {
-        Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
+        Intent intent = new Intent("com.doCompany.alazan.Alarm.ALARM_TRIGGERED");
         PendingIntent pendingIntent;
         pendingIntent = PendingIntent.getBroadcast(
                 context.getApplicationContext(), 234324243, intent, PendingIntent.FLAG_IMMUTABLE);
@@ -30,7 +30,7 @@ public class AlarmManagement {
         Date currentTime = Calendar.getInstance().getTime();
         long afterMilliSeconds = salatDate.getTime() - currentTime.getTime();
 
-        Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
+        Intent intent = new Intent("com.doCompany.alazan.Alarm.ALARM_TRIGGERED");
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 context.getApplicationContext(), 234324243, intent, PendingIntent.FLAG_IMMUTABLE);
 
@@ -42,7 +42,7 @@ public class AlarmManagement {
     }
 
     public static void cancleAlarm(Context context) {
-        Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
+        Intent intent = new Intent("com.doCompany.alazan.Alarm.ALARM_TRIGGERED");
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 context.getApplicationContext(), 234324243, intent, PendingIntent.FLAG_IMMUTABLE);
 

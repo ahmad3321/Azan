@@ -8,6 +8,12 @@
     <uses-permission android:name="android.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <queries>
+        <package android:name="android" />
+    </queries>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -53,9 +59,15 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-8351493934827814~6188123033" />
 
-        <activity android:name=".Azkar_1"></activity>
+        <activity android:name=".Azkar_1" />
 
-        <receiver android:name=".Alarm.AlarmBroadcastReceiver"/>
+        <receiver android:name=".Alarm.AlarmBroadcastReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.media.VOLUME_CHANGED_ACTION" />
+                <action android:name="com.doCompany.alazan.Alarm.ALARM_TRIGGERED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

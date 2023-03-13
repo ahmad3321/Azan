@@ -1,5 +1,6 @@
 package com.doCompany.alazan
 
+import android.Manifest.permission.MODIFY_AUDIO_SETTINGS
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.ProgressDialog
@@ -54,7 +55,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         val perms = arrayOf(
             "android.permission.INTERNET",
-            "android.permission.ACCESS_NETWORK_STATE"
+            "android.permission.ACCESS_NETWORK_STATE",
+            "android.permission.MODIFY_AUDIO_SETTINGS"
         )
         val permsRequestCode = 200
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -387,95 +389,98 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         @SuppressLint("SimpleDateFormat")
         fun setNextAlarm(context: Context, date: String) {
-            try{
+            try {
                 val qlitDal = SQLiteDAL(context)
-            val sdf1 = SimpleDateFormat("dd-MM-yyyy", Locale.US)
-            val salatRecord = qlitDal.getSalatRecord(date)
+                val sdf1 = SimpleDateFormat("dd-MM-yyyy", Locale.US)
+                val salatRecord = qlitDal.getSalatRecord(date)
 
-            val calendar = Calendar.getInstance()
-            val hour = calendar.get(Calendar.HOUR_OF_DAY)
-            val minute = calendar.get(Calendar.MINUTE)
-
-            val formatter = SimpleDateFormat("dd-MM-yyyy HH:mm",Locale.US) // Your custom date-time format
-            var dateTimeString = ""
-
-            if (hour < Integer.parseInt(salatRecord.imsak.substring(0, 2))
-                || (hour == Integer.parseInt(salatRecord.imsak.substring(0, 2))
-                        && minute < Integer.parseInt(salatRecord.imsak.substring(3)) - 5
-                        )
-            ) {
-                dateTimeString = sdf1.format(Date()) + " " + salatRecord.imsak.substring(
-                    0,
-                    2
-                ) + ":" + salatRecord.imsak.substring(3)
-            } else if (hour < Integer.parseInt(salatRecord.fajr.substring(0, 2))
-                || (hour == Integer.parseInt(salatRecord.fajr.substring(0, 2))
-                        && minute < Integer.parseInt(salatRecord.fajr.substring(3)) - 5
-                        )
-            ) {
-                dateTimeString = sdf1.format(Date()) + " " + salatRecord.fajr.substring(
-                    0,
-                    2
-                ) + ":" + salatRecord.fajr.substring(3)
-
-            } else if (hour < Integer.parseInt(salatRecord.dhuhor.substring(0, 2))
-                || (hour == Integer.parseInt(salatRecord.dhuhor.substring(0, 2))
-                        && minute < Integer.parseInt(salatRecord.dhuhor.substring(3)) - 5
-                        )
-            ) {
-                dateTimeString = sdf1.format(Date()) + " " + salatRecord.dhuhor.substring(
-                    0,
-                    2
-                ) + ":" + salatRecord.dhuhor.substring(3)
-            } else if (hour < Integer.parseInt(salatRecord.asr.substring(0, 2))
-                || (hour == Integer.parseInt(salatRecord.asr.substring(0, 2))
-                        && minute < Integer.parseInt(salatRecord.asr.substring(3)) - 5
-                        )
-            ) {
-                dateTimeString = sdf1.format(Date()) + " " + salatRecord.asr.substring(
-                    0,
-                    2
-                ) + ":" + salatRecord.asr.substring(3)
-            } else if (hour < Integer.parseInt(salatRecord.moghrib.substring(0, 2))
-                || (hour == Integer.parseInt(salatRecord.moghrib.substring(0, 2))
-                        && minute < Integer.parseInt(salatRecord.moghrib.substring(3)) - 5
-                        )
-            ) {
-                dateTimeString = sdf1.format(Date()) + " " + salatRecord.moghrib.substring(
-                    0,
-                    2
-                ) + ":" + salatRecord.moghrib.substring(3)
-
-            } else if (hour < Integer.parseInt(salatRecord.eshaa.substring(0, 2))
-                || (hour == Integer.parseInt(salatRecord.eshaa.substring(0, 2))
-                        && minute < Integer.parseInt(salatRecord.eshaa.substring(3)) - 5
-                        )
-            ) {
-                dateTimeString = sdf1.format(Date()) + " " + salatRecord.eshaa.substring(
-                    0,
-                    2
-                ) + ":" + salatRecord.eshaa.substring(3)
-            }
-
-            //if after eshaa, then set imsak for the next day
-            else {
-                val today = formatter.parse(dateTimeString)
                 val calendar = Calendar.getInstance()
+                val hour = calendar.get(Calendar.HOUR_OF_DAY)
+                val minute = calendar.get(Calendar.MINUTE)
 
-                calendar.setTime(today)
-                calendar.add(Calendar.DAY_OF_YEAR, 1)
+                val formatter =
+                    SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.US) // Your custom date-time format
+                var dateTimeString = ""
 
-                val tomorrwo = calendar.time
-                val salatRecord_tomorrwo = qlitDal.getSalatRecord(sdf1.format(tomorrwo))
-                dateTimeString = sdf1.format(Date()) + " " + salatRecord_tomorrwo.imsak.substring(
-                    0,
-                    2
-                ) + ":" + salatRecord_tomorrwo.imsak.substring(3)
-            }
-            AlarmManagement.setAlarmAt(context, formatter.parse(dateTimeString))
-        }catch (ex:Exception){
-           // Toast.makeText(context,"حدث خطأ ما",Toast.LENGTH_SHORT).show()
+                if (hour < Integer.parseInt(salatRecord.imsak.substring(0, 2))
+                    || (hour == Integer.parseInt(salatRecord.imsak.substring(0, 2))
+                            && minute < Integer.parseInt(salatRecord.imsak.substring(3)) - 5
+                            )
+                ) {
+                    dateTimeString = sdf1.format(Date()) + " " + salatRecord.imsak.substring(
+                        0,
+                        2
+                    ) + ":" + salatRecord.imsak.substring(3)
+                } else if (hour < Integer.parseInt(salatRecord.fajr.substring(0, 2))
+                    || (hour == Integer.parseInt(salatRecord.fajr.substring(0, 2))
+                            && minute < Integer.parseInt(salatRecord.fajr.substring(3)) - 5
+                            )
+                ) {
+                    dateTimeString = sdf1.format(Date()) + " " + salatRecord.fajr.substring(
+                        0,
+                        2
+                    ) + ":" + salatRecord.fajr.substring(3)
+
+                } else if (hour < Integer.parseInt(salatRecord.dhuhor.substring(0, 2))
+                    || (hour == Integer.parseInt(salatRecord.dhuhor.substring(0, 2))
+                            && minute < Integer.parseInt(salatRecord.dhuhor.substring(3)) - 5
+                            )
+                ) {
+                    dateTimeString = sdf1.format(Date()) + " " + salatRecord.dhuhor.substring(
+                        0,
+                        2
+                    ) + ":" + salatRecord.dhuhor.substring(3)
+                } else if (hour < Integer.parseInt(salatRecord.asr.substring(0, 2))
+                    || (hour == Integer.parseInt(salatRecord.asr.substring(0, 2))
+                            && minute < Integer.parseInt(salatRecord.asr.substring(3)) - 5
+                            )
+                ) {
+                    dateTimeString = sdf1.format(Date()) + " " + salatRecord.asr.substring(
+                        0,
+                        2
+                    ) + ":" + salatRecord.asr.substring(3)
+                } else if (hour < Integer.parseInt(salatRecord.moghrib.substring(0, 2))
+                    || (hour == Integer.parseInt(salatRecord.moghrib.substring(0, 2))
+                            && minute < Integer.parseInt(salatRecord.moghrib.substring(3)) - 5
+                            )
+                ) {
+                    dateTimeString = sdf1.format(Date()) + " " + salatRecord.moghrib.substring(
+                        0,
+                        2
+                    ) + ":" + salatRecord.moghrib.substring(3)
+
+                } else if (hour < Integer.parseInt(salatRecord.eshaa.substring(0, 2))
+                    || (hour == Integer.parseInt(salatRecord.eshaa.substring(0, 2))
+                            && minute < Integer.parseInt(salatRecord.eshaa.substring(3)) - 5
+                            )
+                ) {
+                    dateTimeString = sdf1.format(Date()) + " " + salatRecord.eshaa.substring(
+                        0,
+                        2
+                    ) + ":" + salatRecord.eshaa.substring(3)
+                }
+
+                //if after eshaa, then set imsak for the next day
+                else {
+                    val today = formatter.parse(date)
+                    val calendar = Calendar.getInstance()
+
+                    calendar.setTime(today)
+                    calendar.add(Calendar.DAY_OF_YEAR, 1)
+
+                    val tomorrwo = calendar.time
+                    val salatRecord_tomorrwo = qlitDal.getSalatRecord(sdf1.format(tomorrwo))
+                    dateTimeString =
+                        sdf1.format(Date()) + " " + salatRecord_tomorrwo.imsak.substring(
+                            0,
+                            2
+                        ) + ":" + salatRecord_tomorrwo.imsak.substring(3)
+                }
+                AlarmManagement.setAlarmAt(context, formatter.parse(dateTimeString))
+            } catch (ex: Exception) {
+                // Toast.makeText(context,"حدث خطأ ما",Toast.LENGTH_SHORT).show()
             }
         }
     }
+
 }
