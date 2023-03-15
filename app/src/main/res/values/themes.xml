@@ -24,7 +24,8 @@
         <item name="windowNoTitle">true</item>
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+<style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
     <style name="pop" parent="AppTheme.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
@@ -39,7 +40,8 @@
 
     <style name="viewParent.headerText">
         <item name="android:textColor">@color/contentTextColor</item>
-        <item name="android:textSize">25sp</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:fontFamily">@font/jaz</item>
         <item name="android:textStyle">bold</item>
     </style>
 

@@ -50,11 +50,11 @@
 
 
         <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_marginTop="50dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/logo"/>
+            android:src="@drawable/logo_awqaf"/>
         <TextView
             style="@style/viewParent.headerText.settingsMiniTitle"
             android:text="App ver 1.0.0"

@@ -134,6 +134,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.item_city -> {
                 showPopup(findViewById(R.id.txt_city))
             }
+            R.id.azkar_counter -> {
+                startActivity(Intent(this, CounterActivity::class.java))
+
+            }
             R.id.nav_about -> {
                 val intent = Intent(this, popp::class.java)
                 startActivity(intent)
