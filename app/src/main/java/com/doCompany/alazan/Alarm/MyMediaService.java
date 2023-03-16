@@ -5,6 +5,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.util.Log;
@@ -48,8 +49,11 @@ public class MyMediaService extends Service {
                 startForeground(1, notification);
             }
 
-            mp = MediaPlayer.create(getApplicationContext(), R.raw.azan_sh);
-            mp.start();
+            SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+            if (prefs.getBoolean("enable_voice", true)) {
+                mp = MediaPlayer.create(getApplicationContext(), R.raw.azan_sh);
+                mp.start();
+            }
 
         } catch (Exception e) {
             // Handle exception
