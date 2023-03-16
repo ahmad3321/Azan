@@ -55,7 +55,6 @@ public class MyMediaService extends Service {
             // Handle exception
         }
 
-
         return START_STICKY;
     }
 
@@ -68,9 +67,11 @@ public class MyMediaService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mp.stop();
-        mp.release();
-        mp=null;
+        if (mp != null) {
+            mp.stop();
+            mp.release();
+            mp = null;
+        }
         Log.d("Service", "Media stopped and released");
 
     }
