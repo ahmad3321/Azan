@@ -9,6 +9,8 @@ import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.util.Log;
 
+import androidx.core.app.NotificationCompat;
+
 import com.doCompany.alazan.R;
 
 
@@ -24,7 +26,6 @@ public class MyMediaService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
         // Start media playback
         try {
 
@@ -37,25 +38,23 @@ public class MyMediaService extends Service {
                         "My Channel",
                         NotificationManager.IMPORTANCE_DEFAULT
                 );
+                channel.setSound(null,null);
                 NotificationManager notificationManager = getSystemService(NotificationManager.class);
                 notificationManager.createNotificationChannel(channel);
 
                 Notification notification = new Notification.Builder(this, "channelId")
                         .setSmallIcon(R.drawable.ic_launcher_background)
-                        .setContentTitle("Service is running")
-                        .setContentText("Your service is performing an important operation")
+                        .setContentTitle("الأذان")
+                        .setContentText("حان الان وقت الأذان")
+                        .setSmallIcon(R.drawable.logo_awqafmini)
                         .build();
                 startForeground(1, notification);
             }
-
             mp = MediaPlayer.create(getApplicationContext(), R.raw.azan_sh);
             mp.start();
-
         } catch (Exception e) {
             // Handle exception
         }
-
-
         return START_STICKY;
     }
 
