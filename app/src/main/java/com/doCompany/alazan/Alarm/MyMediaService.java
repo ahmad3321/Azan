@@ -48,7 +48,7 @@ public class MyMediaService extends Service {
                 startForeground(1, notification);
             }
 
-            mp = MediaPlayer.create(getApplicationContext(), R.raw.azan);
+            mp = MediaPlayer.create(getApplicationContext(), R.raw.azan_sh);
             mp.start();
 
         } catch (Exception e) {

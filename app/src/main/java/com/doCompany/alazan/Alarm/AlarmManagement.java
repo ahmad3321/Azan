@@ -30,7 +30,7 @@ public class AlarmManagement {
     public static void setAlarmAt(Context context, @NonNull Date salatDate) {
         Date currentTime = Calendar.getInstance().getTime();
         long afterMilliSeconds = salatDate.getTime() - currentTime.getTime();
-
+        Log.d("after : ", String.valueOf(afterMilliSeconds));
         Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 context.getApplicationContext(), 234324243, intent, PendingIntent.FLAG_IMMUTABLE);

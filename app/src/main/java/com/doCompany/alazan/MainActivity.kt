@@ -414,7 +414,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
                 if (hour < Integer.parseInt(salatRecord.imsak.substring(0, 2))
                     || (hour == Integer.parseInt(salatRecord.imsak.substring(0, 2))
-                            && minute < Integer.parseInt(salatRecord.imsak.substring(3)) - 5
+                            && minute < Integer.parseInt(salatRecord.imsak.substring(3))
                             )
                 ) {
                     dateTimeString = sdf1.format(Date()) + " " + salatRecord.imsak.substring(
@@ -423,7 +423,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     ) + ":" + salatRecord.imsak.substring(3)
                 } else if (hour < Integer.parseInt(salatRecord.fajr.substring(0, 2))
                     || (hour == Integer.parseInt(salatRecord.fajr.substring(0, 2))
-                            && minute < Integer.parseInt(salatRecord.fajr.substring(3)) - 5
+                            && minute < Integer.parseInt(salatRecord.fajr.substring(3))
                             )
                 ) {
                     dateTimeString = sdf1.format(Date()) + " " + salatRecord.fajr.substring(
@@ -433,7 +433,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
                 } else if (hour < Integer.parseInt(salatRecord.dhuhor.substring(0, 2))
                     || (hour == Integer.parseInt(salatRecord.dhuhor.substring(0, 2))
-                            && minute < Integer.parseInt(salatRecord.dhuhor.substring(3)) - 5
+                            && minute < Integer.parseInt(salatRecord.dhuhor.substring(3))
                             )
                 ) {
                     dateTimeString = sdf1.format(Date()) + " " + salatRecord.dhuhor.substring(
@@ -442,7 +442,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     ) + ":" + salatRecord.dhuhor.substring(3)
                 } else if (hour < Integer.parseInt(salatRecord.asr.substring(0, 2))
                     || (hour == Integer.parseInt(salatRecord.asr.substring(0, 2))
-                            && minute < Integer.parseInt(salatRecord.asr.substring(3)) - 5
+                            && minute < Integer.parseInt(salatRecord.asr.substring(3))
                             )
                 ) {
                     dateTimeString = sdf1.format(Date()) + " " + salatRecord.asr.substring(
@@ -451,7 +451,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     ) + ":" + salatRecord.asr.substring(3)
                 } else if (hour < Integer.parseInt(salatRecord.moghrib.substring(0, 2))
                     || (hour == Integer.parseInt(salatRecord.moghrib.substring(0, 2))
-                            && minute < Integer.parseInt(salatRecord.moghrib.substring(3)) - 5
+                            && minute < Integer.parseInt(salatRecord.moghrib.substring(3))
                             )
                 ) {
                     dateTimeString = sdf1.format(Date()) + " " + salatRecord.moghrib.substring(
@@ -461,7 +461,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
                 } else if (hour < Integer.parseInt(salatRecord.eshaa.substring(0, 2))
                     || (hour == Integer.parseInt(salatRecord.eshaa.substring(0, 2))
-                            && minute < Integer.parseInt(salatRecord.eshaa.substring(3)) - 5
+                            && minute < Integer.parseInt(salatRecord.eshaa.substring(3))
                             )
                 ) {
                     dateTimeString = sdf1.format(Date()) + " " + salatRecord.eshaa.substring(
