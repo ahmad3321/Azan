@@ -5,6 +5,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.util.Log;
@@ -38,7 +39,6 @@ public class MyMediaService extends Service {
                         "My Channel",
                         NotificationManager.IMPORTANCE_DEFAULT
                 );
-                channel.setSound(null,null);
                 NotificationManager notificationManager = getSystemService(NotificationManager.class);
                 notificationManager.createNotificationChannel(channel);
 
@@ -50,8 +50,13 @@ public class MyMediaService extends Service {
                         .build();
                 startForeground(1, notification);
             }
-            mp = MediaPlayer.create(getApplicationContext(), R.raw.azan_sh);
-            mp.start();
+
+            SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+            if (prefs.getBoolean("enable_voice", true)) {
+                mp = MediaPlayer.create(getApplicationContext(), R.raw.azan_sh);
+                mp.start();
+            }
+
         } catch (Exception e) {
             // Handle exception
         }
@@ -67,9 +72,11 @@ public class MyMediaService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mp.stop();
-        mp.release();
-        mp=null;
+        if (mp != null) {
+            mp.stop();
+            mp.release();
+            mp = null;
+        }
         Log.d("Service", "Media stopped and released");
 
     }
