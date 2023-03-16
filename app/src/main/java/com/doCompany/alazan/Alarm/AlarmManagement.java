@@ -21,12 +21,13 @@ public class AlarmManagement {
                 context.getApplicationContext(), 234324243, intent, PendingIntent.FLAG_IMMUTABLE);
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
+        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
                 + (afterSeconds * 1000), pendingIntent);
+//        Toast.makeText(context, "Alarm set in " + afterSeconds + " seconds", Toast.LENGTH_LONG).show();
     }
 
 
-    public static void setAlarmAt(Context context, Date salatDate) {
+    public static void setAlarmAt(Context context, @NonNull Date salatDate) {
         Date currentTime = Calendar.getInstance().getTime();
         long afterMilliSeconds = salatDate.getTime() - currentTime.getTime();
 
@@ -35,10 +36,9 @@ public class AlarmManagement {
                 context.getApplicationContext(), 234324243, intent, PendingIntent.FLAG_IMMUTABLE);
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
+        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
                 + afterMilliSeconds, pendingIntent);
-
-        Log.d("ALARMSET", "after " + afterMilliSeconds);
+//        Toast.makeText(context.getApplicationContext(), "after " + afterMilliSeconds, Toast.LENGTH_LONG).show();
     }
 
     public static void cancleAlarm(Context context) {
