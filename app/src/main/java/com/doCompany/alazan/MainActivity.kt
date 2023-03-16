@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //setSupportActionBar(toolbar)
         //getUsers(city)
         val sharedPreference = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
-        var sh_city = sharedPreference.getString("city_Arabic", "")
+        val sh_city = sharedPreference.getString("city_Arabic", "")
         if (sh_city == null || sh_city == "") {
             city = "Idleb"
             txt_city.setText("إدلب")
@@ -96,7 +96,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 return
             }
             getListTimesFromApi(this, city, "Syria", "3")
-
         } else {
             FillDataInView(salatRecord)
         }
@@ -247,7 +246,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     pDialog.hide()
                 })
                 sqldal.addListOfDays(list)
-                var salatRecord = sqldal!!.getSalatRecord(ChooseDate)
+                val salatRecord = sqldal!!.getSalatRecord(ChooseDate)
                 FillDataInView(salatRecord)
                 setNextAlarm(applicationContext, salatRecord.date)
             }
