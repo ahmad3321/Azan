@@ -32,6 +32,7 @@ public class AlarmManagement {
         long afterMilliSeconds = salatDate.getTime() - currentTime.getTime();
         Log.d("after : ", String.valueOf(afterMilliSeconds));
         Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
+        intent.putExtra("key","");
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 context.getApplicationContext(), 234324243, intent, PendingIntent.FLAG_IMMUTABLE);
 
@@ -43,6 +44,7 @@ public class AlarmManagement {
 
     public static void cancleAlarm(Context context) {
         Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
+        intent.putExtra("key","");
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 context.getApplicationContext(), 234324243, intent, PendingIntent.FLAG_IMMUTABLE);
 
