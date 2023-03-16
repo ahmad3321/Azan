@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/splash_gradiwnt"/>
+
+    <item android:top="100dp"
+        android:bottom="100dp"
+        android:left="100dp"
+        android:right="100dp">
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/logo_awqafmini"/>
+    </item>
+
+</layer-list>

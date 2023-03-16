@@ -77,4 +77,12 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+        <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+            <item name="android:windowBackground">@drawable/background_splash</item>
+            <item name="colorPrimary">@color/colorPrimary</item>
+            <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+            <item name="colorAccent">@color/black</item>
+            <item name="android:statusBarColor">@color/white</item>
+        </style>
+
 </resources>
