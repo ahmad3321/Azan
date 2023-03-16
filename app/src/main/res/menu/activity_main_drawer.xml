@@ -24,7 +24,11 @@
                       android:icon="@drawable/ic_mos"
                       android:title="أذكار مابعد الصلاة"
               />
-
+              <item
+                  android:id="@+id/azkar_counter"
+                  android:icon="@drawable/ic_mos"
+                  android:title="عداد الأذكار"
+                  />
           </menu>
       </item>
   </group>

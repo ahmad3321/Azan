@@ -10,13 +10,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:gravity="center_horizontal">
+        android:background="@color/white"
+        android:gravity="center_horizontal">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/azk1"
                 android:textSize="32dp"
-                android:fontFamily="@font/ge"
+            android:textColor="@color/blackazkar"
+            android:fontFamily="@font/ge"
                 android:layout_marginTop="20dp"
 
         />
@@ -39,14 +41,16 @@
                     android:layout_marginTop="20dp"
                     android:layout_gravity="start"
                     android:padding="4dp"
-                    android:background="@color/col11"
+                android:textColor="@color/blackazkar"
+                android:background="@color/col11"
             />
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/zeker2"
                         android:textSize="20dp"
-                        android:fontFamily="@font/hamaa"
+                    android:textColor="@color/blackazkar"
+                    android:fontFamily="@font/hamaa"
                         android:layout_gravity="start"
                         android:padding="4dp"
                         android:background="@color/col12"
@@ -59,7 +63,8 @@
                         android:fontFamily="@font/hamaa"
                         android:layout_gravity="start"
                         android:padding="4dp"
-                        android:background="@color/col11"
+                    android:textColor="@color/blackazkar"
+                    android:background="@color/col11"
                 />
                 <TextView
                         android:layout_width="match_parent"
@@ -68,7 +73,8 @@
                         android:textSize="20dp"
                         android:fontFamily="@font/hamaa"
                         android:layout_gravity="start"
-                        android:background="@color/col12"
+                    android:textColor="@color/blackazkar"
+                    android:background="@color/col12"
                         android:padding="4dp"/>
                 <TextView
                         android:layout_width="match_parent"
@@ -78,7 +84,8 @@
                         android:fontFamily="@font/hamaa"
                         android:layout_gravity="start"
                         android:padding="4dp"
-                        android:background="@color/col11"
+                    android:textColor="@color/blackazkar"
+                    android:background="@color/col11"
 
                 />
                 <TextView
@@ -88,7 +95,8 @@
                         android:textSize="20dp"
                         android:fontFamily="@font/hamaa"
                         android:layout_gravity="start"
-                        android:background="@color/col12"
+                    android:textColor="@color/blackazkar"
+                    android:background="@color/col12"
                         android:padding="4dp"/>
                 <TextView
                         android:layout_width="match_parent"
@@ -98,7 +106,8 @@
                         android:fontFamily="@font/hamaa"
                         android:layout_gravity="start"
                         android:background="@color/col12"
-                        android:padding="4dp"/>
+                    android:textColor="@color/blackazkar"
+                    android:padding="4dp"/>
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -106,7 +115,8 @@
                         android:textSize="20dp"
                         android:fontFamily="@font/hamaa"
                         android:layout_gravity="start"
-                        android:background="@color/col12"
+                    android:textColor="@color/blackazkar"
+                    android:background="@color/col12"
                         android:padding="4dp"/>
                 <TextView
                         android:layout_width="match_parent"
@@ -115,7 +125,8 @@
                         android:textSize="20dp"
                         android:fontFamily="@font/hamaa"
                         android:layout_gravity="start"
-                        android:background="@color/col12"
+                    android:textColor="@color/blackazkar"
+                    android:background="@color/col12"
                         android:padding="4dp"/>
                 <TextView
                         android:layout_width="match_parent"
@@ -124,7 +135,8 @@
                         android:textSize="20dp"
                         android:fontFamily="@font/hamaa"
                         android:layout_gravity="start"
-                        android:background="@color/col11"
+                    android:textColor="@color/blackazkar"
+                    android:background="@color/col11"
                         android:padding="4dp"/>
                 <TextView
                         android:layout_width="wrap_content"
@@ -132,7 +144,8 @@
                         android:text="@string/zeker10"
                         android:textSize="20dp"
                         android:fontFamily="@font/hamaa"
-                        android:layout_gravity="start"
+                    android:textColor="@color/blackazkar"
+                    android:layout_gravity="start"
                         android:background="@color/col12"
                         android:padding="4dp"/>
                 <TextView
@@ -142,7 +155,8 @@
                         android:textSize="20dp"
                         android:fontFamily="@font/hamaa"
                         android:layout_gravity="start"
-                        android:background="@color/col12"
+                    android:textColor="@color/blackazkar"
+                    android:background="@color/col12"
                         android:padding="4dp"/>
                 <TextView
                         android:layout_width="match_parent"
@@ -150,7 +164,8 @@
                         android:text="اللهُـمَّ إِنِّـي أَسْأَلُـكَ عِلْمـاً نافِعـاً وَرِزْقـاً طَيِّـباً ، وَعَمَـلاً مُتَقَـبَّلاً."
                         android:textSize="20dp"
                         android:fontFamily="@font/hamaa"
-                        android:layout_gravity="start"
+                    android:textColor="@color/blackazkar"
+                    android:layout_gravity="start"
                         android:background="@color/col11"
                         android:padding="4dp"/>
                 <TextView
@@ -160,7 +175,8 @@
                         android:textSize="20dp"
                         android:fontFamily="@font/hamaa"
                         android:layout_gravity="start"
-                        android:background="@color/col11"
+                    android:textColor="@color/blackazkar"
+                    android:background="@color/col11"
                         android:padding="4dp"/>
                 <TextView
                         android:layout_width="match_parent"
@@ -169,7 +185,8 @@
                         android:textSize="20dp"
                         android:fontFamily="@font/hamaa"
                         android:background="@color/col12"
-                        android:layout_gravity="start"
+                    android:textColor="@color/blackazkar"
+                    android:layout_gravity="start"
                         android:padding="4dp"/>
                 <TextView
                         android:layout_width="match_parent"
@@ -177,7 +194,8 @@
                         android:text="بعد صلاة الصبح والمغرب."
                         android:textSize="20dp"
                         android:fontFamily="@font/hamaa"
-                        android:layout_gravity="start"
+                    android:textColor="@color/blackazkar"
+                    android:layout_gravity="start"
                         android:background="@color/col12"
                         android:padding="4dp"/>
                 <TextView
@@ -186,7 +204,8 @@
                         android:text="اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ."
                         android:textSize="20dp"
                         android:fontFamily="@font/hamaa"
-                        android:background="@color/col11"
+                    android:textColor="@color/blackazkar"
+                    android:background="@color/col11"
                         android:layout_gravity="start"
                         android:padding="4dp"
                         android:layout_marginBottom="10dp"

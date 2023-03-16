@@ -10,7 +10,7 @@
     <dimen name="font_salat">25sp</dimen>
     <dimen name="font_note">17sp</dimen>
     <dimen name="datepicker">40dp</dimen>
-    <dimen name="hi_rect">35dp</dimen>
+    <dimen name="hi_rect">45dp</dimen>
     <dimen name="margin_top">50dp</dimen>
     <dimen name="h_r_sel">35dp</dimen>
     <dimen name="margin_rect_top">10dp</dimen>

@@ -19,4 +19,9 @@
     <string name="voice">الصوت</string>
     <string name="Notifications">التنبيهات</string>
     <string name="Settings">الاعدادات</string>
+    <string name="nav_header_title" translatable="false">أوقات الأذان في المحرر</string>
+    <string name="totalzeker" translatable="false">Final Count</string>
+    <string name="TotalDeleted">Clear Final Count</string>
+    <string name="_0">Final Count :0</string>
+    <string name="zero">0</string>
 </resources>
