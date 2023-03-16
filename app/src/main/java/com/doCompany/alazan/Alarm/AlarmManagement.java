@@ -21,7 +21,7 @@ public class AlarmManagement {
                 context.getApplicationContext(), 234324243, intent, PendingIntent.FLAG_IMMUTABLE);
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
+        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
                 + (afterSeconds * 1000), pendingIntent);
     }
 
