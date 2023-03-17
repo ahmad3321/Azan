@@ -81,8 +81,8 @@ public class MyMediaService extends Service {
                 stopForeground(false);
             }
 
-            SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-            /*if (prefs.getBoolean("enable_voice", true)) {
+            /*SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+            if (prefs.getBoolean("enable_voice", true)) {
                 //mp = MediaPlayer.create(getApplicationContext(), R.raw.azan_sh);
                // mp.start();
             }*/
