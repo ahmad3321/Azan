@@ -58,7 +58,13 @@ public class MyMediaService extends Service {
                                 getApplicationContext().getPackageName() +
                                 "/" +
                                 R.raw.azan_sh);
-                channel.setSound(soundUri,audioAttributes);
+                SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                if (prefs.getBoolean("enable_voice", true)) {
+                    channel.setSound(soundUri,audioAttributes);
+                }else{
+                    channel.setSound(null,null);
+                }
+
                 NotificationManager notificationManager = getSystemService(NotificationManager.class);
                 notificationManager.createNotificationChannel(channel);
 
@@ -76,10 +82,10 @@ public class MyMediaService extends Service {
             }
 
             SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-            if (prefs.getBoolean("enable_voice", true)) {
+            /*if (prefs.getBoolean("enable_voice", true)) {
                 //mp = MediaPlayer.create(getApplicationContext(), R.raw.azan_sh);
                // mp.start();
-            }
+            }*/
         } catch (Exception e) {
             Log.e("error ",e.toString());
         }
