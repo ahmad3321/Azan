@@ -5,9 +5,13 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.app.TaskStackBuilder;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioAttributes;
 import android.media.MediaPlayer;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
@@ -17,6 +21,8 @@ import androidx.core.app.NotificationCompat;
 
 import com.doCompany.alazan.MainActivity;
 import com.doCompany.alazan.R;
+
+import java.util.Calendar;
 
 
 public class MyMediaService extends Service {
@@ -43,13 +49,21 @@ public class MyMediaService extends Service {
                         "My Channel",
                         NotificationManager.IMPORTANCE_DEFAULT
                 );
-
+                AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                        .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                        .setUsage(AudioAttributes.USAGE_ALARM)
+                        .build();
+                Uri soundUri = Uri.parse(
+                        "android.resource://" +
+                                getApplicationContext().getPackageName() +
+                                "/" +
+                                R.raw.azan_sh);
+                channel.setSound(soundUri,audioAttributes);
                 NotificationManager notificationManager = getSystemService(NotificationManager.class);
                 notificationManager.createNotificationChannel(channel);
 
-                Intent intentt = new Intent(this, AlarmBroadcastReceiver.class);
-                intentt.setAction("notification_cancelled");
-                PendingIntent pend=PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_MUTABLE);
+               PendingIntent contentIntent =
+                        PendingIntent.getBroadcast(this,  Calendar.getInstance().get(Calendar.MILLISECOND), new Intent(this, MainActivity.class),  PendingIntent.FLAG_IMMUTABLE);
 
                 Notification notification = new Notification.Builder(this, "channelId")
                         .setSmallIcon(R.drawable.ic_launcher_background)
@@ -63,10 +77,9 @@ public class MyMediaService extends Service {
 
             SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
             if (prefs.getBoolean("enable_voice", true)) {
-                mp = MediaPlayer.create(getApplicationContext(), R.raw.azan_sh);
-                mp.start();
+                //mp = MediaPlayer.create(getApplicationContext(), R.raw.azan_sh);
+               // mp.start();
             }
-
         } catch (Exception e) {
             Log.e("error ",e.toString());
         }

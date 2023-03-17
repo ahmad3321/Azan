@@ -19,18 +19,12 @@ public class AlarmBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        String action = intent.getAction();
-        if(action!=null) {
-            if (action.equals("notification_cancelled")) {
-                Toast.makeText(context, "ok", Toast.LENGTH_LONG).show();
-            }
-        }
-        else {
+
             Intent i = new Intent(context, MyMediaService.class);
             context.startService(i);
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
             MainActivity.MyCompanion.setNextAlarm(context.getApplicationContext(), sdf.format(new Date()));
-        }
+
             //Toast.makeText(context, "حان موعد الأذان", Toast.LENGTH_LONG).show();
     }
 }
