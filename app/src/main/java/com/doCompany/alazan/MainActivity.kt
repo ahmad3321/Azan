@@ -91,8 +91,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         var salatRecord = sqldal!!.getSalatRecord(ChooseDate)
         if (salatRecord == null) {
             sqldal.ClearTable(SQLiteDAL.TABLE_Salah_Time)
-            if(!isDeviceOnline(this)){
-                Toast.makeText(this,"لا يوجد اتصال بالانترنت",Toast.LENGTH_SHORT).show()
+            if (!isDeviceOnline(this)) {
+                Toast.makeText(this, "لا يوجد اتصال بالانترنت", Toast.LENGTH_SHORT).show()
                 return
             }
             getListTimesFromApi(this, city, "Syria", "3")
@@ -112,6 +112,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
         nav_view.setNavigationItemSelectedListener(this)
+
     }
 
     override fun onBackPressed() {
@@ -408,8 +409,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val hour = calendar.get(Calendar.HOUR_OF_DAY)
                 val minute = calendar.get(Calendar.MINUTE)
 
-                val formatter =
-                    SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.US)
+                val formatter = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.US)
                 var dateTimeString = ""
 
                 if (hour < Integer.parseInt(salatRecord.imsak.substring(0, 2))
@@ -472,7 +472,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
                 //if after eshaa, then set imsak for the next day
                 else {
-                    val today = formatter.parse(date)
+                    val today = sdf1.parse(date)
                     val calendar = Calendar.getInstance()
 
                     calendar.setTime(today)
@@ -480,18 +480,34 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
                     val tomorrwo = calendar.time
                     val salatRecord_tomorrwo = qlitDal.getSalatRecord(sdf1.format(tomorrwo))
-                    dateTimeString =
-                        sdf1.format(Date()) + " " + salatRecord_tomorrwo.imsak.substring(
-                            0,
-                            2
-                        ) + ":" + salatRecord_tomorrwo.imsak.substring(3)
+
+                    if (salatRecord_tomorrwo != null) {
+                        dateTimeString =
+                            sdf1.format(tomorrwo) + " " + salatRecord_tomorrwo.imsak.substring(
+                                0,
+                                2
+                            ) + ":" + salatRecord_tomorrwo.imsak.substring(3)
+                    }
+                    else{
+//                        qlitDal.ClearTable(SQLiteDAL.TABLE_Salah_Time)
+//                        if (!isDeviceOnline(this)) {
+//                            Toast.makeText(this, "لا يوجد اتصال بالانترنت", Toast.LENGTH_SHORT).show()
+//                            return
+//                        }
+//                        getListTimesFromApi(this, city, "Syria", "3")
+                    }
                 }
+                Log.d("ALARMSET", "date = " + date)
+                Log.d("ALARMSET", "dateTimeString = " + dateTimeString)
+
                 AlarmManagement.setAlarmAt(context, formatter.parse(dateTimeString))
             } catch (ex: Exception) {
                 // Toast.makeText(context,"حدث خطأ ما",Toast.LENGTH_SHORT).show()
+                Log.d("ALARMSET EX", ex.toString())
             }
         }
     }
+
     private fun isDeviceOnline(context: Context): Boolean {
         val connManager = context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

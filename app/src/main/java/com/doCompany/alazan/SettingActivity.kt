@@ -12,9 +12,9 @@ class SettingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_setting)
         val prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE)
         val swEnableVoice = findViewById<Switch>(R.id.Voice)
-        if(!prefs.getBoolean("enable_voice",false)){
-            swEnableVoice.isChecked=false
-        }
+
+        swEnableVoice.isChecked = prefs.getBoolean("enable_voice", true)
+
         swEnableVoice.setOnCheckedChangeListener { buttonView, isChecked ->
             var editor = prefs.edit()
             editor = prefs.edit()
