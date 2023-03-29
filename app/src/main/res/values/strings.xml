@@ -46,5 +46,18 @@
     <string name="TotalDeleted"> تم مسح المجموع الكلي </string>
     <string name="_0">المجموع الكلي: 0</string>
     <string name="zero">0</string>
-
+    <string name="Services">Services</string>
+    <string-array name="city_array">
+        <item />
+        <item>إدلب</item>
+        <item>حلب</item>
+        <item>جسر الشغور</item>
+        <item>سرمدا</item>
+        <item>عفرين</item>
+        <item>الباب</item>
+        <item>سلقين</item>
+        <item>أطمة</item>
+        <item>اعزاز</item>
+        <item>منبج</item>
+    </string-array>
 </resources>

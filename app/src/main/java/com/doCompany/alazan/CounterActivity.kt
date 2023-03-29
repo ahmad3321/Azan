@@ -3,9 +3,9 @@ package com.doCompany.alazan
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.doCompany.alazan.Models.RandomColor
 import kotlinx.android.synthetic.main.activity_counter.*
 
 class CounterActivity : AppCompatActivity() {

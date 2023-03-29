@@ -24,4 +24,18 @@
     <string name="TotalDeleted">Clear Final Count</string>
     <string name="_0">Final Count :0</string>
     <string name="zero">0</string>
+    <string name="Services">خدمات</string>
+    <string-array name="city_array">
+        <item></item>
+        <item>إدلب</item>
+        <item>حلب</item>
+        <item>جسر الشغور</item>
+        <item>سرمدا</item>
+        <item>عفرين</item>
+        <item>الباب</item>
+        <item>سلقين</item>
+        <item>أطمة</item>
+        <item>اعزاز</item>
+        <item>منبج</item>
+    </string-array>
 </resources>

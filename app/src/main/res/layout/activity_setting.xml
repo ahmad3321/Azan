@@ -44,9 +44,10 @@
             android:text="Regional"/>
 
         <TextView
+            android:id="@+id/azan_voice"
             style="@style/viewParent.headerText.settingsTextIcon"
             android:drawableLeft="@drawable/ic_languages"
-            android:text="Language" />
+            android:text="المؤذّن" />
 
 
         <ImageView

@@ -5,19 +5,14 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.app.TaskStackBuilder;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
-import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
-
-import androidx.core.app.NotificationCompat;
 
 import com.doCompany.alazan.MainActivity;
 import com.doCompany.alazan.R;
@@ -53,12 +48,15 @@ public class MyMediaService extends Service {
                         .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                         .setUsage(AudioAttributes.USAGE_ALARM)
                         .build();
+                SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                String voice =prefs.getString("voice_raw","azan_shoayb");
+                Resources res = getApplicationContext().getResources();
+                int soundId = res.getIdentifier(voice.length()>2?voice:"azan_shoayb", "raw", getApplicationContext().getPackageName());
                 Uri soundUri = Uri.parse(
                         "android.resource://" +
                                 getApplicationContext().getPackageName() +
                                 "/" +
-                                R.raw.azan_sh);
-                SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                                soundId);
                 if (prefs.getBoolean("enable_voice", true)) {
                     channel.setSound(soundUri,audioAttributes);
                 }else{

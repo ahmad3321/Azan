@@ -17,11 +17,8 @@
     <dimen name="margin_but_top">20dp</dimen>
 
     <dimen name="headerTextSize">22sp</dimen>
-
-
-
-
-
+    <dimen name="margin_rect_start">40dp</dimen>
+    <dimen name="margin_rect_start_time">80dp</dimen>
 
 
 </resources>

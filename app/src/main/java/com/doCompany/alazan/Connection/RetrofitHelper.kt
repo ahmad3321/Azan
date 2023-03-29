@@ -1,4 +1,4 @@
-package com.doCompany.alazan
+package com.doCompany.alazan.Connection
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

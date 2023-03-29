@@ -13,10 +13,10 @@ class SplashScreen : AppCompatActivity() {
         //startActivity(Intent(this@SplashScreen, MainActivity::class.java))
         //finish()
         Handler().postDelayed(Runnable { // This method will be executed once the timer is over
-            val i = Intent(this@SplashScreen, MainActivity::class.java)
+            val i = Intent(this@SplashScreen, MainActivity2::class.java)
             startActivity(i)
             finish()
-        }, 5000)
+        }, 4000)
 
     }
 }

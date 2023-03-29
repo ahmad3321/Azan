@@ -1,4 +1,4 @@
-package com.doCompany.alazan;
+package com.doCompany.alazan.Models;
 
 import android.graphics.Color;
 

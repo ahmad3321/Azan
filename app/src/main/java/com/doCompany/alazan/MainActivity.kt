@@ -1,6 +1,5 @@
 package com.doCompany.alazan
 
-import android.Manifest.permission.MODIFY_AUDIO_SETTINGS
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.ProgressDialog
@@ -8,7 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -23,6 +21,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.doCompany.alazan.Alarm.AlarmManagement
+import com.doCompany.alazan.Connection.RetrofitHelper
 import com.doCompany.alazan.Connection.SQLiteDAL
 import com.doCompany.alazan.Models.Datum
 import com.doCompany.alazan.Models.SalatRecord
@@ -153,43 +152,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
-    }
-
-    fun getUsers(city: String) {
-        // Instantiate the RequestQueue.
-        val pDialog: ProgressDialog
-        pDialog = ProgressDialog(this)
-        pDialog.setMessage("Loading...")
-        pDialog.show()
-        //val queue = Volley.newRequestQueue(applicationContext)
-        // geet(url,applicationContext)
-        // Request a string response from the provided URL.
-
-        /*val request = JsonObjectRequest(Request.Method.GET, url, null,
-            { response ->
-                try {
-                    strResp = response.toString()
-                    jsonOb = JSONObject(strResp)
-                    jsonArray = jsonOb.getJSONArray("data")
-                    jsonInner = jsonArray.getJSONObject(d + 1)
-                    time = jsonInner.getJSONObject("timings")
-                    var fajar = time.getString("Fajr")
-
-
-                    t_faj1.text = fajar.substring(0, 5)
-                    t_duha1.text = time.getString("Sunrise").substring(0, 5)
-                    t_dhuhor1.text = time.getString("Dhuhr").substring(0, 5)
-                    t_asr1.text = time.getString("Asr").substring(0, 5)
-                    t_moghrib1.text = time.getString("Maghrib").substring(0, 5)
-                    t_eshaa1.text = time.getString("Isha").substring(0, 5)
-                }catch (ex:Exception){
-                    pDialog.hide()
-                }
-
-        }, { error ->
-            Log.e("TAG", "RESPONSE IS $error")
-        })
-        queue.add(request)*/
     }
 
     private fun getListTimesFromApi(

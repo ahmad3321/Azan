@@ -16,7 +16,7 @@
         </item>
     </group>
   <group>
-      <item android:title="">
+      <item android:title="@string/Services">
 
           <menu>
               <item
@@ -26,7 +26,7 @@
               />
               <item
                   android:id="@+id/azkar_counter"
-                  android:icon="@drawable/ic_counter"
+                  android:icon="@drawable/ic_counter_m"
                   android:title="عداد الأذكار"
                   />
           </menu>

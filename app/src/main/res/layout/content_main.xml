@@ -70,11 +70,10 @@
             android:textColor="@color/white"
             android:fontFamily="@font/jaze"
             android:textSize="@dimen/font_salat"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="40dp"
             android:textAlignment="textStart"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
             android:id="@+id/t_imsak"
             />
         <TextView
@@ -102,11 +101,10 @@
                 android:textColor="@color/white"
                 android:fontFamily="@font/jaze"
                 android:textSize="@dimen/font_salat"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="40dp"
                 android:textAlignment="textStart"
             android:layout_width="90dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
                 android:id="@+id/t_faj"
         />
         <TextView
@@ -134,11 +132,10 @@
                 android:textColor="@color/white"
                 android:fontFamily="@font/jaze"
                 android:textSize="@dimen/font_salat"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="40dp"
             android:textAlignment="textStart"
             android:layout_width="90dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
                 android:id="@+id/t_duha"
         />
         <TextView
@@ -168,9 +165,8 @@
                  android:textSize="@dimen/font_salat"
                 android:textAlignment="textStart"
             android:layout_width="90dp"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="40dp"
             android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
                 android:id="@+id/t_dhuhor"
         />
         <TextView
@@ -199,10 +195,9 @@
                 android:fontFamily="@font/jaze"
                 android:textSize="@dimen/font_salat"
                 android:textAlignment="textStart"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="40dp"
             android:layout_width="90dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
                 android:id="@+id/t_asr"
         />
         <TextView
@@ -231,10 +226,9 @@
                 android:fontFamily="@font/jaze"
                 android:textSize="@dimen/font_salat"
                 android:textAlignment="textStart"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="40dp"
             android:layout_width="90dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
                 android:id="@+id/t_moghrib"
         />
         <TextView
@@ -264,9 +258,8 @@
                 android:textSize="@dimen/font_salat"
                 android:textAlignment="textStart"
             android:layout_width="90dp"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="40dp"
             android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
                 android:id="@+id/t_eshaa"
         />
         <TextView
@@ -285,7 +278,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="@dimen/hi_rect"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="20dp"
             android:background="@color/line"
             android:gravity="center">
         <TextView
