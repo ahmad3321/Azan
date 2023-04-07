@@ -6,8 +6,6 @@ plugins {
 }
 
 android {
-
-
     signingConfigs {
         debug {
             keyAlias 'key_azan'
@@ -80,5 +78,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'androidx.work:work-runtime:2.0.1'
     implementation "com.github.skydoves:powermenu:2.2.2"
+
 
 }

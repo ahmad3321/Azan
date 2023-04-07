@@ -117,6 +117,7 @@ class MainActivity2 : AppCompatActivity() , NavigationView.OnNavigationItemSelec
         }
         card_azan.setOnClickListener {
             Main_Scroll.fullScroll(View.FOCUS_DOWN)
+            Toast.makeText(this,"لا يوجد اتصال بالانترنت", Toast.LENGTH_SHORT).show()
         }
         card_azkar.setOnClickListener {
             startActivity(Intent(this, Azkar_1::class.java))
@@ -125,6 +126,7 @@ class MainActivity2 : AppCompatActivity() , NavigationView.OnNavigationItemSelec
             startActivity(Intent(this, CounterActivity::class.java))
         }
         card_qibla.setOnClickListener {
+            startActivity(Intent(this, QiblaActivity::class.java))
         }
         /*val mOnNavigationItemSelectedListener =
             BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -143,7 +145,6 @@ class MainActivity2 : AppCompatActivity() , NavigationView.OnNavigationItemSelec
                 false
             }*/
     }
-
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)

@@ -24,6 +24,14 @@
         android:theme="@style/Theme.AlAzan"
         android:usesCleartextTraffic="true"
         tools:targetApi="32">
+
+        <activity
+            android:name=".QiblaActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".MainActivity2"
             android:exported="false">

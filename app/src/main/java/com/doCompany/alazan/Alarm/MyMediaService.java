@@ -66,8 +66,8 @@ public class MyMediaService extends Service {
                 NotificationManager notificationManager = getSystemService(NotificationManager.class);
                 notificationManager.createNotificationChannel(channel);
 
-               PendingIntent contentIntent =
-                        PendingIntent.getBroadcast(this,  Calendar.getInstance().get(Calendar.MILLISECOND), new Intent(this, MainActivity.class),  PendingIntent.FLAG_IMMUTABLE);
+              // PendingIntent contentIntent =
+                    //    PendingIntent.getBroadcast(this,  Calendar.getInstance().get(Calendar.MILLISECOND), new Intent(this, MainActivity.class),  PendingIntent.FLAG_IMMUTABLE);
 
                 Notification notification = new Notification.Builder(this, "channelId")
                         .setSmallIcon(R.drawable.ic_launcher_background)
